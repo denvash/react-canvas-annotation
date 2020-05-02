@@ -1,6 +1,6 @@
 # react-canvas-annotation
 
-> Annotation on canvas
+> A canvas annotation library for React
 
 [![NPM](https://img.shields.io/npm/v/react-canvas-annotation.svg)](https://www.npmjs.com/package/react-canvas-annotation) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
@@ -28,4 +28,3 @@ import ReactCanvasAnnotation from 'react-canvas-annotation';
 ## License
 
 MIT © [denvash](https://github.com/denvash)
-# react-canvas-annotation
