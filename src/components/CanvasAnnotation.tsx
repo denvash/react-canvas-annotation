@@ -144,5 +144,5 @@ const NoCursorTrack = styled.div`
   cursor: none;
 `;
 
-export { Container };
+export const className = Container;
 export default CanvasAnnotation;

@@ -3,7 +3,7 @@ import { LabelType } from 'interfaces/enums';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { AppInitializer, store } from 'store';
-import CanvasAnnotation from './components/CanvasAnnotation';
+import CanvasAnnotation, { className } from './components/CanvasAnnotation';
 
 AppInitializer.init();
 
@@ -18,6 +18,5 @@ const LABEL_TYPE: { [key in LabelType]: LabelType } = {
   [LabelType.RECTANGLE]: LabelType.RECTANGLE,
 };
 
-export { LABEL_TYPE };
-export const className: string = CanvasAnnotation.className;
+export { LABEL_TYPE, className };
 export default ReactCanvasAnnotation;
