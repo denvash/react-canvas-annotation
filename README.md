@@ -13,18 +13,19 @@ npm install --save react-canvas-annotation
 ## Usage
 
 ```tsx
-import React, { Component } from 'react'
+import ReactCanvasAnnotation from 'react-canvas-annotation';
 
-import MyComponent from 'react-canvas-annotation'
-import 'react-canvas-annotation/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
+<ReactCanvasAnnotation
+  zoom={zoom}
+  imageFile={imageFile}
+  labelsData={labelsDataDefault}
+  onLabelsDataChange={onLabelsDataChange}
+  annotationType={annotationType}
+  isImageDrag={isImageDrag}
+/>;
 ```
 
 ## License
 
 MIT © [denvash](https://github.com/denvash)
+# react-canvas-annotation
