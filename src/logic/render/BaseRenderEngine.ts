@@ -1,6 +1,6 @@
-import { EditorData } from 'interfaces/EditorData';
 import { EventType } from 'interfaces/enums/EventType';
 import { LabelType } from 'interfaces/enums/LabelType';
+import { IEditorData } from 'interfaces/IEditorData';
 import { LabelsData } from 'store/labels/types';
 import { MouseEventUtil } from 'utils/MouseEventUtil';
 
@@ -12,7 +12,7 @@ export abstract class BaseRenderEngine {
     this.canvas = canvas;
   }
 
-  public update(data: EditorData, onLabelsDataChange?: (labelsData: LabelsData) => void): void {
+  public update(data: IEditorData, onLabelsDataChange?: (labelsData: LabelsData) => void): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
         case EventType.MOUSE_MOVE:
@@ -30,14 +30,14 @@ export abstract class BaseRenderEngine {
     }
   }
 
-  protected abstract mouseDownHandler(data: EditorData): void;
-  protected abstract mouseMoveHandler(data: EditorData): void;
+  protected abstract mouseDownHandler(data: IEditorData): void;
+  protected abstract mouseMoveHandler(data: IEditorData): void;
   protected abstract mouseUpHandler(
-    data: EditorData,
+    data: IEditorData,
     onLabelsDataChange?: (labelsData: LabelsData) => void,
   ): void;
 
-  abstract render(data: EditorData): void;
+  abstract render(data: IEditorData): void;
 
   abstract isInProgress(): boolean;
 }

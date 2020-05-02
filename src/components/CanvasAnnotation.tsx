@@ -1,15 +1,13 @@
 import { IconPaths } from 'components/Icons';
 import Icon from 'components/Icons/Icon';
-import useCanvasListeners from 'hooks/useCanvasListeners';
-import useCanvasZoom from 'hooks/useCanvasZoom';
-import ClassName from 'interfaces/ClassName';
-import { CursorType } from 'interfaces/enums/CursorType';
-import { LabelType } from 'interfaces/enums/LabelType';
+import { useCanvasListeners, useCanvasZoom } from 'hooks';
+import { ICanvasAnnotation } from 'interfaces';
+import { CursorType } from 'interfaces/enums';
 import isEqual from 'lodash.isequal';
+import { EditorModel } from 'model';
 import React, { useEffect, useMemo } from 'react';
 import Scrollbars from 'react-custom-scrollbars';
 import { useDispatch, useSelector } from 'react-redux';
-import { EditorModel } from 'staticModels/EditorModel';
 import { AppState } from 'store';
 import { updateImageDragModeStatus } from 'store/general/actionCreators';
 import {
@@ -17,21 +15,11 @@ import {
   updateActiveLabelId,
   updateActiveLabelType,
 } from 'store/labels/actionCreators';
-import { AnnotationData, LabelsData } from 'store/labels/types';
+import { AnnotationData } from 'store/labels/types';
 import styled from 'styled-components';
 import { ifProp } from 'styled-tools';
 import 'tailwindcss/dist/base.css';
 import tw from 'twin.macro';
-
-interface IProps {
-  annotationType: LabelType;
-  className?: string;
-  imageFile: File;
-  labelsData: LabelsData;
-  onRectChange?: (labelsData: LabelsData) => void;
-  zoom?: number;
-  isImageDrag?: boolean;
-}
 
 const selector = (state: AppState) => ({
   customCursorStyle: state.general.customCursorStyle,
@@ -40,12 +28,14 @@ const selector = (state: AppState) => ({
 
 const onContextMenu = (event: React.MouseEvent<HTMLCanvasElement>) => event.preventDefault();
 
-const CanvasAnnotation: React.FC<IProps> & ClassName = ({
+const NOOP = () => {};
+
+const CanvasAnnotation: React.FC<ICanvasAnnotation> = ({
   annotationType,
   className,
   imageFile,
-  labelsData,
-  onRectChange: onLabelsDataChange = () => {},
+  labels,
+  onChange = NOOP,
   zoom = 1,
   isImageDrag = false,
 }) => {
@@ -53,9 +43,9 @@ const CanvasAnnotation: React.FC<IProps> & ClassName = ({
     () => ({
       fileData: imageFile,
       loadStatus: false,
-      ...labelsData,
+      ...labels,
     }),
-    [imageFile, labelsData],
+    [imageFile, labels],
   );
 
   const dispatch = useDispatch();
@@ -81,7 +71,7 @@ const CanvasAnnotation: React.FC<IProps> & ClassName = ({
     imageData,
     annotationType,
     imageDragMode: isImageDrag,
-    onLabelsDataChange,
+    onLabelsDataChange: onChange,
   });
 
   return (
@@ -154,5 +144,5 @@ const NoCursorTrack = styled.div`
   cursor: none;
 `;
 
-CanvasAnnotation.className = Container;
+export { Container };
 export default CanvasAnnotation;

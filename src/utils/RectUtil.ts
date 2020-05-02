@@ -1,8 +1,8 @@
 import { Direction } from 'interfaces/enums/Direction';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
+import { RectAnchor } from 'interfaces/IRectAnchor';
 import { ISize } from 'interfaces/ISize';
-import { RectAnchor } from 'interfaces/RectAnchor';
 import { NumberUtil } from './NumberUtil';
 
 export class RectUtil {

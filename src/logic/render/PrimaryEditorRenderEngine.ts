@@ -1,6 +1,6 @@
 import { IRect } from 'interfaces/IRect';
 import { ViewPortActions } from 'logic/actions/ViewPortActions';
-import { EditorModel } from 'staticModels/EditorModel';
+import { EditorModel } from 'model/EditorModel';
 import { BaseRenderEngine } from './BaseRenderEngine';
 
 export class PrimaryEditorRenderEngine extends BaseRenderEngine {

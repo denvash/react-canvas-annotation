@@ -1,5 +1,5 @@
+import { CursorType } from 'interfaces/enums';
 import { store } from 'store';
-import { CursorType } from '../../interfaces/enums/CursorType';
 
 export class GeneralSelector {
   public static getPreventCustomCursorStatus(): boolean {

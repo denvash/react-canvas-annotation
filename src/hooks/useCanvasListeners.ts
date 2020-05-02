@@ -1,10 +1,10 @@
-import { EditorData } from 'interfaces/EditorData';
 import { EventType } from 'interfaces/enums/EventType';
 import { LabelType } from 'interfaces/enums/LabelType';
+import { IEditorData } from 'interfaces/IEditorData';
 import { EditorActions } from 'logic/actions/EditorActions';
 import { ViewPortActions } from 'logic/actions/ViewPortActions';
+import { EditorModel } from 'model/EditorModel';
 import { useEffect } from 'react';
-import { EditorModel } from 'staticModels/EditorModel';
 import { AnnotationData, LabelsData } from 'store/labels/types';
 import { CanvasUtil } from 'utils/CanvasUtil';
 import { FileUtil } from 'utils/FileUtil';
@@ -26,7 +26,7 @@ const useCanvasListeners = ({
 }: IProps) => {
   useEffect(() => {
     const update = (event: MouseEvent) => {
-      const editorData: EditorData = EditorActions.getEditorData(event);
+      const editorData: IEditorData = EditorActions.getEditorData(event);
       EditorModel.mousePositionOnViewPortContent = CanvasUtil.getMousePositionOnCanvasFromEvent(
         event,
         EditorModel.canvas,

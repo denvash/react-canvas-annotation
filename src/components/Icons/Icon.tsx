@@ -1,4 +1,4 @@
-import ClassName from 'interfaces/ClassName';
+import ClassName from 'interfaces/types/ClassName';
 import React from 'react';
 import styled from 'styled-components';
 

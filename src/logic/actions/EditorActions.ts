@@ -1,6 +1,6 @@
-import { EditorData } from 'interfaces/EditorData';
 import { CursorType } from 'interfaces/enums/CursorType';
 import { LabelType } from 'interfaces/enums/LabelType';
+import { IEditorData } from 'interfaces/IEditorData';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
 import { ISize } from 'interfaces/ISize';
@@ -8,8 +8,8 @@ import { ViewPortHelper } from 'logic/helpers/ViewPortHelper';
 import { PolygonRenderEngine } from 'logic/render/PolygonRenderEngine';
 import { PrimaryEditorRenderEngine } from 'logic/render/PrimaryEditorRenderEngine';
 import { RectRenderEngine } from 'logic/render/RectRenderEngine';
+import { EditorModel } from 'model/EditorModel';
 import React from 'react';
-import { EditorModel } from 'staticModels/EditorModel';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
 import { CanvasUtil } from 'utils/CanvasUtil';
 import { DrawUtil } from 'utils/DrawUtil';
@@ -69,7 +69,7 @@ export class EditorActions {
   // GETTERS
   // =================================================================================================================
 
-  public static getEditorData(event?: Event): EditorData {
+  public static getEditorData(event?: Event): IEditorData {
     return {
       mousePositionOnViewPortContent: EditorModel.mousePositionOnViewPortContent,
       viewPortContentSize: CanvasUtil.getSize(EditorModel.canvas),

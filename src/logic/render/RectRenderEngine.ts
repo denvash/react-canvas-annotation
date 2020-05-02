@@ -1,10 +1,10 @@
-import { EditorData } from 'interfaces/EditorData';
 import { CursorType } from 'interfaces/enums/CursorType';
 import { LabelStatus } from 'interfaces/enums/LabelStatus';
 import { LabelType } from 'interfaces/enums/LabelType';
+import { IEditorData } from 'interfaces/IEditorData';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
-import { RectAnchor } from 'interfaces/RectAnchor';
+import { RectAnchor } from 'interfaces/IRectAnchor';
 import { EditorActions } from 'logic/actions/EditorActions';
 import { RenderEngineConfig } from 'settings/RenderEngineConfig';
 import { store } from 'store';
@@ -43,7 +43,7 @@ export class RectRenderEngine extends BaseRenderEngine {
   // EVENT HANDLERS
   // =================================================================================================================
 
-  public mouseDownHandler = (data: EditorData) => {
+  public mouseDownHandler = (data: IEditorData) => {
     const isMouseOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
     const isMouseOverCanvas: boolean = RenderEngineUtil.isMouseOverCanvas(data);
     if (isMouseOverCanvas) {
@@ -70,7 +70,7 @@ export class RectRenderEngine extends BaseRenderEngine {
   };
 
   public mouseUpHandler = (
-    data: EditorData,
+    data: IEditorData,
     onLabelsDataChange?: (labelsData: LabelsData) => void,
   ) => {
     if (!!data.viewPortContentImageRect) {
@@ -131,7 +131,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     this.endRectTransformation();
   };
 
-  public mouseMoveHandler = (data: EditorData) => {
+  public mouseMoveHandler = (data: IEditorData) => {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.startResizeRectAnchor) {
@@ -153,7 +153,7 @@ export class RectRenderEngine extends BaseRenderEngine {
   // RENDERING
   // =================================================================================================================
 
-  public render(data: EditorData) {
+  public render(data: IEditorData) {
     const activeLabelId: string = LabelsSelector.getActiveLabelId();
     const imageData: AnnotationData = LabelsSelector.getActiveImageData();
 
@@ -192,7 +192,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     }
   }
 
-  private drawInactiveRect(labelRect: LabelRect, data: EditorData) {
+  private drawInactiveRect(labelRect: LabelRect, data: IEditorData) {
     const rectOnImage: IRect = RenderEngineUtil.transferRectFromViewPortContentToImage(
       labelRect.rect,
       data,
@@ -203,7 +203,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     this.renderRect(rectOnImage, displayAsActive);
   }
 
-  private drawActiveRect(labelRect: LabelRect, data: EditorData) {
+  private drawActiveRect(labelRect: LabelRect, data: IEditorData) {
     let rect: IRect = this.calculateRectRelativeToActiveImage(labelRect.rect, data);
     if (!!this.startResizeRectAnchor) {
       const startAnchorPosition: IPoint = PointUtil.add(
@@ -243,7 +243,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     }
   }
 
-  private updateCursorStyle(data: EditorData) {
+  private updateCursorStyle(data: IEditorData) {
     if (
       !!this.canvas &&
       !!data.mousePositionOnViewPortContent &&
@@ -278,7 +278,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     return !!this.startCreateRectPoint || !!this.startResizeRectAnchor;
   }
 
-  private calculateRectRelativeToActiveImage(rect: IRect, data: EditorData): IRect {
+  private calculateRectRelativeToActiveImage(rect: IRect, data: IEditorData): IRect {
     const scale: number = RenderEngineUtil.calculateImageScale(data);
     return RectUtil.scaleRect(rect, 1 / scale);
   }
@@ -301,7 +301,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     store.dispatch(updateActiveLabelId(labelRect.id));
   };
 
-  private getRectUnderMouse(data: EditorData): LabelRect {
+  private getRectUnderMouse(data: IEditorData): LabelRect {
     const activeRectLabel: LabelRect = LabelsSelector.getActiveRectLabel();
     if (!!activeRectLabel && this.isMouseOverRectEdges(activeRectLabel.rect, data)) {
       return activeRectLabel;
@@ -316,7 +316,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     return null;
   }
 
-  private isMouseOverRectEdges(rect: IRect, data: EditorData): boolean {
+  private isMouseOverRectEdges(rect: IRect, data: IEditorData): boolean {
     const rectOnImage: IRect = RectUtil.translate(
       this.calculateRectRelativeToActiveImage(rect, data),
       data.viewPortContentImageRect,
@@ -358,7 +358,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     return null;
   }
 
-  private getAnchorUnderMouse(data: EditorData): RectAnchor {
+  private getAnchorUnderMouse(data: IEditorData): RectAnchor {
     const labelRects: LabelRect[] = LabelsSelector.getActiveImageData().labelRects;
     for (let i = 0; i < labelRects.length; i++) {
       const rect: IRect = this.calculateRectRelativeToActiveImage(labelRects[i].rect, data);

@@ -1,8 +1,8 @@
-import { IPoint } from '../interfaces/IPoint';
-import { IRect } from '../interfaces/IRect';
-import { ISize } from '../interfaces/ISize';
+import { IPoint } from './IPoint';
+import { IRect } from './IRect';
+import { ISize } from './ISize';
 
-export interface EditorData {
+export interface IEditorData {
   viewPortContentSize: ISize;
   mousePositionOnViewPortContent: IPoint;
   event?: Event;

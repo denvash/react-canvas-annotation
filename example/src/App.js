@@ -11,10 +11,10 @@ const labelsDataDefault = {
   labelPolygons: [],
 };
 
-const onLabelsDataChange = console.log;
 const ZOOM_STEP = 0.1;
 
 const App = () => {
+  const [labels, setLabels] = useState(labelsDataDefault);
   const [annotationType, setAnnotationType] = useState(LABEL_TYPE.RECTANGLE);
   const [imageFile, setImageFile] = useState(null);
   const [isImageDrag, toggleDragMode] = useReducer(p => !p, false);
@@ -40,6 +40,10 @@ const App = () => {
     fetchImage();
   }, []);
 
+  useEffect(() => {
+    console.log(labels);
+  }, [labels]);
+
   return (
     <Container>
       <TopActions>
@@ -55,8 +59,8 @@ const App = () => {
         <ReactCanvasAnnotation
           zoom={zoom}
           imageFile={imageFile}
-          labelsData={labelsDataDefault}
-          onLabelsDataChange={onLabelsDataChange}
+          labels={labels}
+          onChange={setLabels}
           annotationType={annotationType}
           isImageDrag={isImageDrag}
         />

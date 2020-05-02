@@ -1,9 +1,9 @@
-import { EditorData } from 'interfaces/EditorData';
 import { CursorType } from 'interfaces/enums/CursorType';
 import { EventType } from 'interfaces/enums/EventType';
+import { IEditorData } from 'interfaces/IEditorData';
 import { IPoint } from 'interfaces/IPoint';
 import { ViewPortActions } from 'logic/actions/ViewPortActions';
-import { EditorModel } from 'staticModels/EditorModel';
+import { EditorModel } from 'model/EditorModel';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import { MouseEventUtil } from 'utils/MouseEventUtil';
@@ -13,7 +13,7 @@ export class ViewPortHelper {
   private startScrollPosition: IPoint;
   private mouseStartPosition: IPoint;
 
-  public update(data: EditorData): void {
+  public update(data: IEditorData): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
         case EventType.MOUSE_MOVE:
@@ -31,7 +31,7 @@ export class ViewPortHelper {
     }
   }
 
-  private mouseDownHandler(data: EditorData) {
+  private mouseDownHandler(data: IEditorData) {
     const event = data.event as MouseEvent;
     this.startScrollPosition = data.absoluteViewPortContentScrollPosition;
     this.mouseStartPosition = { x: event.screenX, y: event.screenY };
@@ -47,7 +47,7 @@ export class ViewPortHelper {
     EditorModel.canvas.style.cursor = 'none';
   }
 
-  private mouseMoveHandler(data: EditorData) {
+  private mouseMoveHandler(data: IEditorData) {
     if (!!this.startScrollPosition && !!this.mouseStartPosition) {
       const event = data.event as MouseEvent;
       const currentMousePosition: IPoint = { x: event.screenX, y: event.screenY };

@@ -1,8 +1,8 @@
 import { IPoint } from 'interfaces/IPoint';
 import { EditorActions } from 'logic/actions/EditorActions';
 import { ViewPortActions } from 'logic/actions/ViewPortActions';
+import { EditorModel } from 'model/EditorModel';
 import { useEffect, useRef } from 'react';
-import { EditorModel } from 'staticModels/EditorModel';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
 
 const DEFAULT_SCROLL_POSITION = { x: 0.5, y: 0.5 };

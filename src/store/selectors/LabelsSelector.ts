@@ -1,7 +1,7 @@
+import { LabelType } from 'interfaces/enums';
 import find from 'lodash.find';
 import { store } from 'store';
-import { LabelType } from '../../interfaces/enums/LabelType';
-import { AnnotationData, LabelName, LabelPolygon, LabelRect } from '../labels/types';
+import { AnnotationData, LabelName, LabelPolygon, LabelRect } from 'store/labels/types';
 
 export class LabelsSelector {
   public static getLabelNames(): LabelName[] {

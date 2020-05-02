@@ -1,0 +1,1 @@
+export { ICanvasAnnotation } from './ICanvasAnnotation';
