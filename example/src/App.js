@@ -1,6 +1,6 @@
 import { OptionBox, TypePicker } from 'components';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
-import ReactCanvasAnnotation, { className, LABEL_TYPE } from 'react-canvas-annotation';
+import { className, LABEL_TYPE, ReactCanvasAnnotation } from 'react-canvas-annotation';
 import styled from 'styled-components';
 import 'tailwindcss/dist/base.css';
 import tw from 'twin.macro';

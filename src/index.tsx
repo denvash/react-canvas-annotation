@@ -18,5 +18,4 @@ const LABEL_TYPE: { [key in LabelType]: LabelType } = {
   [LabelType.RECTANGLE]: LabelType.RECTANGLE,
 };
 
-export { LABEL_TYPE, className };
-export default ReactCanvasAnnotation;
+export { ReactCanvasAnnotation, LABEL_TYPE, className };

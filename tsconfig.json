@@ -7,7 +7,6 @@
     "moduleResolution": "node",
     "jsx": "react",
     "sourceMap": true,
-    "skipLibCheck": true,
     "declaration": true,
     "esModuleInterop": true,
     "noImplicitReturns": true,
@@ -17,7 +16,8 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "skipLibCheck": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "example"]
