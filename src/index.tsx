@@ -23,4 +23,11 @@ const ReactCanvasAnnotation = (props: IProps) => (
   </Provider>
 );
 
+const LABEL_TYPE: { [key in LabelType]: LabelType } = {
+  [LabelType.POLYGON]: LabelType.POLYGON,
+  [LabelType.RECTANGLE]: LabelType.RECTANGLE,
+};
+
+export { LABEL_TYPE };
+export const className: string = CanvasAnnotation.className;
 export default ReactCanvasAnnotation;
