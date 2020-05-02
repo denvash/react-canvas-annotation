@@ -22,7 +22,7 @@ import { LineUtil } from 'utils/LineUtil';
 import { MouseEventUtil } from 'utils/MouseEventUtil';
 import { RectUtil } from 'utils/RectUtil';
 import { RenderEngineUtil } from 'utils/RenderEngineUtil';
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'uuid';
 import { BaseRenderEngine } from './BaseRenderEngine';
 
 export class PolygonRenderEngine extends BaseRenderEngine {
@@ -97,7 +97,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
           );
 
           if (anchorIndex !== null) {
-            this.startExistingLabelResize(data, polygonUnderMouse.id, anchorIndex);
+            this.startExistingLabelResize(polygonUnderMouse.id, anchorIndex);
           } else {
             store.dispatch(updateActiveLabelId(polygonUnderMouse.id));
             const isMouseOverNewAnchor: boolean = this.isMouseOverAnchor(
@@ -354,7 +354,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     const activeLabelId = LabelsSelector.getActiveLabelNameId();
     const imageData: AnnotationData = LabelsSelector.getActiveImageData();
     const labelPolygon: LabelPolygon = {
-      id: uuidv4(),
+      id: uuid.v4(),
       labelId: activeLabelId,
       vertices: polygon,
     };
@@ -367,7 +367,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   // TRANSFER
   // =================================================================================================================
 
-  private startExistingLabelResize(data: EditorData, labelId: string, anchorIndex: number) {
+  private startExistingLabelResize(labelId: string, anchorIndex: number) {
     store.dispatch(updateActiveLabelId(labelId));
     this.resizeAnchorIndex = anchorIndex;
     EditorActions.setViewPortActionsDisabledStatus(true);
@@ -449,7 +449,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     };
 
     store.dispatch(updateImageDataById(`0`, newImageData));
-    this.startExistingLabelResize(data, activeLabel.id, this.suggestedAnchorIndexInPolygon);
+    this.startExistingLabelResize(activeLabel.id, this.suggestedAnchorIndexInPolygon);
     this.discardSuggestedPoint();
   }
 

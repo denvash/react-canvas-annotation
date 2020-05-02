@@ -21,7 +21,7 @@ import { DrawUtil } from 'utils/DrawUtil';
 import { PointUtil } from 'utils/PointUtil';
 import { RectUtil } from 'utils/RectUtil';
 import { RenderEngineUtil } from 'utils/RenderEngineUtil';
-import { v4 as uuidv4 } from 'uuid';
+import uuid from 'uuid';
 import { BaseRenderEngine } from './BaseRenderEngine';
 
 export class RectRenderEngine extends BaseRenderEngine {
@@ -287,7 +287,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     const activeLabelId = LabelsSelector.getActiveLabelNameId();
     const imageData: AnnotationData = LabelsSelector.getActiveImageData();
     const labelRect: LabelRect = {
-      id: uuidv4(),
+      id: uuid.v4(),
       labelId: activeLabelId,
       rect,
       status: LabelStatus.ACCEPTED,

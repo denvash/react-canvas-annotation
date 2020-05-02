@@ -1,5 +1,5 @@
 import { LabelType } from 'interfaces/enums/LabelType';
-import { filter } from 'lodash';
+import filter from 'lodash.filter';
 import { store } from 'store';
 import { updateImageData, updateImageDataById } from 'store/labels/actionCreators';
 import { AnnotationData, LabelName, LabelPolygon, LabelRect } from 'store/labels/types';
@@ -23,7 +23,7 @@ export class LabelActions {
   }
 
   public static deleteRectLabelById(imageId: string, labelRectId: string) {
-    const imageData: AnnotationData = LabelsSelector.getImageDataById(imageId);
+    const imageData: AnnotationData = LabelsSelector.getImageDataById();
     const newImageData = {
       ...imageData,
       labelRects: filter(imageData.labelRects, (currentLabel: LabelRect) => {
@@ -34,7 +34,7 @@ export class LabelActions {
   }
 
   public static deletePolygonLabelById(imageId: string, labelPolygonId: string) {
-    const imageData: AnnotationData = LabelsSelector.getImageDataById(imageId);
+    const imageData: AnnotationData = LabelsSelector.getImageDataById();
     const newImageData = {
       ...imageData,
       labelPolygons: filter(imageData.labelPolygons, (currentLabel: LabelPolygon) => {

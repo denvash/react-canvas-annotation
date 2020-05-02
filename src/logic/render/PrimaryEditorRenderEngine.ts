@@ -1,4 +1,3 @@
-import { EditorData } from 'interfaces/EditorData';
 import { IRect } from 'interfaces/IRect';
 import { ViewPortActions } from 'logic/actions/ViewPortActions';
 import { EditorModel } from 'staticModels/EditorModel';
@@ -9,19 +8,11 @@ export class PrimaryEditorRenderEngine extends BaseRenderEngine {
     super(canvas);
   }
 
-  // =================================================================================================================
-  // EVENT HANDLERS
-  // =================================================================================================================
+  public mouseMoveHandler(): void {}
+  public mouseDownHandler(): void {}
+  public mouseUpHandler(): void {}
 
-  public mouseMoveHandler(data: EditorData): void {}
-  public mouseDownHandler(data: EditorData): void {}
-  public mouseUpHandler(data: EditorData): void {}
-
-  // =================================================================================================================
-  // RENDERING
-  // =================================================================================================================
-
-  public render(data: EditorData): void {
+  public render(): void {
     EditorModel.primaryRenderingEngine.drawImage(
       EditorModel.image,
       ViewPortActions.calculateViewPortContentImageRect(),

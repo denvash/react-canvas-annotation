@@ -1,4 +1,4 @@
-import { find } from 'lodash';
+import find from 'lodash.find';
 import { store } from 'store';
 import { LabelType } from '../../interfaces/enums/LabelType';
 import { AnnotationData, LabelName, LabelPolygon, LabelRect } from '../labels/types';
@@ -37,7 +37,7 @@ export class LabelsSelector {
     return imagesData[index];
   }
 
-  public static getImageDataById(id: string): AnnotationData {
+  public static getImageDataById(): AnnotationData {
     const imagesData: AnnotationData[] = LabelsSelector.getImagesData();
     return imagesData[0];
   }
