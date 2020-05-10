@@ -30,7 +30,7 @@ export type LabelsState = {
   activeLabelType: LabelType;
   activeLabelId: string;
   highlightedLabelId: string;
-  imagesData: AnnotationData[];
+  imageData: AnnotationData;
 };
 
 interface UpdateActiveLabelNameId {

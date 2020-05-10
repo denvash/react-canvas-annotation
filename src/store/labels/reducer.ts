@@ -6,7 +6,7 @@ const initialState: LabelsState = {
   activeLabelType: null,
   activeLabelId: null,
   highlightedLabelId: null,
-  imagesData: [],
+  imageData: null,
 };
 
 export function labelsReducer(state = initialState, action: LabelsActionTypes): LabelsState {
@@ -38,7 +38,7 @@ export function labelsReducer(state = initialState, action: LabelsActionTypes): 
     case Action.UPDATE_IMAGES_DATA: {
       return {
         ...state,
-        imagesData: action.payload.imageData,
+        imageData: action.payload.imageData,
       };
     }
     default:

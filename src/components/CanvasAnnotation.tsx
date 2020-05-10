@@ -51,8 +51,8 @@ const CanvasAnnotation: React.FC<ICanvasAnnotation> = ({
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(updateImageData([imageData]));
-  }, [dispatch, imageData, imageFile]);
+    dispatch(updateImageData(imageData));
+  }, [dispatch, imageData]);
 
   useEffect(() => {
     dispatch(updateImageDragModeStatus(isImageDrag));
