@@ -1,10 +1,9 @@
-import { LabelType } from '../../interfaces/enums/LabelType';
-import { IPoint } from '../../interfaces/IPoint';
-import { IRect } from '../../interfaces/IRect';
-import { Action } from '../Actions';
+import { LabelType } from 'interfaces/enums';
+import { IPoint } from 'interfaces/IPoint';
+import { IRect } from 'interfaces/IRect';
+import { Action } from 'store/Actions';
 
 export type LabelRect = {
-  // GENERAL
   id: string;
   rect: IRect;
 };

@@ -9,8 +9,7 @@ import image from './img.jpg';
 const labelsDataDefault = {
   labelRects: [
     {
-      id: 'fb112202-83d3-44e7-bacd-d4706a3895a7',
-      labelId: null,
+      id: 'Rect-Example',
       rect: {
         x: 697.2371134020618,
         y: 454.26804123711344,
@@ -19,7 +18,17 @@ const labelsDataDefault = {
       },
     },
   ],
-  labelPolygons: [],
+  labelPolygons: [
+    {
+      id: `Poly-Example`,
+      vertices: [
+        { x: 623.7525773195875, y: 440.9072164948454 },
+        { x: 1331.8762886597938, y: 305.07216494845363 },
+        { x: 1641.4020618556701, y: 732.6185567010309 },
+        { x: 882.0618556701031, y: 790.5154639175258 },
+      ],
+    },
+  ],
 };
 
 const ZOOM_STEP = 0.1;
