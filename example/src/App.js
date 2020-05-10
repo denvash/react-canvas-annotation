@@ -6,7 +6,7 @@ import 'tailwindcss/dist/base.css';
 import tw from 'twin.macro';
 import image from './img.jpg';
 
-const labelsDataDefault = {
+const labelsDataExample = {
   labelRects: [
     {
       id: 'Rect-Example',
@@ -29,6 +29,10 @@ const labelsDataDefault = {
       ],
     },
   ],
+};
+const labelsDataDefault = {
+  labelRects: [],
+  labelPolygons: [],
 };
 
 const ZOOM_STEP = 0.1;
@@ -74,6 +78,9 @@ const App = () => {
         <OptionBox onClick={zoomAction.maxZoom}>Zoom Max</OptionBox>
         <OptionBox isPressed={isImageDrag} onClick={toggleDragMode} disabled={zoom === 1}>
           Drag Image (Only on zoomed image)
+        </OptionBox>
+        <OptionBox onClick={() => setLabels(prev => ({ ...prev, ...labelsDataExample }))}>
+          Add Random Rect
         </OptionBox>
       </TopActions>
       {imageFile && (

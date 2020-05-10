@@ -2,7 +2,7 @@ import { LabelType } from 'interfaces/enums/LabelType';
 import filter from 'lodash.filter';
 import { store } from 'store';
 import { updateImageData, updateImageDataById } from 'store/labels/actionCreators';
-import { AnnotationData, LabelName, LabelPolygon, LabelRect } from 'store/labels/types';
+import { AnnotationData, LabelPolygon, LabelRect } from 'store/labels/types';
 import { LabelsSelector } from 'store/selectors/LabelsSelector';
 
 export class LabelActions {
@@ -79,10 +79,5 @@ export class LabelActions {
         }
       }),
     };
-  }
-
-  public static labelExistsInLabelNames(label: string): boolean {
-    const labelNames: LabelName[] = LabelsSelector.getLabelNames();
-    return labelNames.map((label: LabelName) => label.name).includes(label);
   }
 }

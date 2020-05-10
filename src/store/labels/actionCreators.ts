@@ -1,6 +1,6 @@
 import { LabelType } from '../../interfaces/enums/LabelType';
 import { Action } from '../Actions';
-import { AnnotationData, LabelName, LabelsActionTypes } from './types';
+import { AnnotationData, LabelsActionTypes } from './types';
 
 export function updateActiveLabelNameId(activeLabelNameId: string): LabelsActionTypes {
   return {
@@ -62,24 +62,6 @@ export function updateImageData(imageData: AnnotationData[]): LabelsActionTypes 
     type: Action.UPDATE_IMAGES_DATA,
     payload: {
       imageData,
-    },
-  };
-}
-
-export function updateLabelNames(labels: LabelName[]) {
-  return {
-    type: Action.UPDATE_LABEL_NAMES,
-    payload: {
-      labels,
-    },
-  };
-}
-
-export function updateFirstLabelCreatedFlag(firstLabelCreatedFlag: boolean) {
-  return {
-    type: Action.UPDATE_FIRST_LABEL_CREATED_FLAG,
-    payload: {
-      firstLabelCreatedFlag,
     },
   };
 }
