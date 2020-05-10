@@ -79,9 +79,7 @@ const App = () => {
         <OptionBox isPressed={isImageDrag} onClick={toggleDragMode} disabled={zoom === 1}>
           Drag Image (Only on zoomed image)
         </OptionBox>
-        <OptionBox onClick={() => setLabels(prev => ({ ...prev, ...labelsDataExample }))}>
-          Add Random Rect
-        </OptionBox>
+        <OptionBox onClick={() => setLabels({ ...labelsDataExample })}>Add Random Rect</OptionBox>
       </TopActions>
       {imageFile && (
         <ReactCanvasAnnotation

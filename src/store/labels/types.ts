@@ -60,34 +60,16 @@ interface UpdateActiveLabelType {
     activeLabelType: LabelType;
   };
 }
-
-interface UpdateImageDataById {
-  type: typeof Action.UPDATE_IMAGE_DATA_BY_ID;
-  payload: {
-    id: string;
-    newImageData: AnnotationData;
-  };
-}
-
-interface AddImageData {
-  type: typeof Action.ADD_IMAGES_DATA;
-  payload: {
-    imageData: AnnotationData[];
-  };
-}
-
 interface UpdateImageData {
   type: typeof Action.UPDATE_IMAGES_DATA;
   payload: {
-    imageData: AnnotationData[];
+    imageData: AnnotationData;
   };
 }
 
 export type LabelsActionTypes =
   | UpdateActiveLabelNameId
   | UpdateActiveLabelType
-  | UpdateImageDataById
-  | AddImageData
   | UpdateImageData
   | UpdateActiveLabelId
   | UpdateHighlightedLabelId;

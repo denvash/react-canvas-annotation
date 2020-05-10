@@ -12,7 +12,7 @@ import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
   updateActiveLabelId,
   updateHighlightedLabelId,
-  updateImageDataById,
+  updateImageData,
 } from 'store/labels/actionCreators';
 import { AnnotationData, LabelPolygon, LabelsData } from 'store/labels/types';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
@@ -360,7 +360,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     const { labelRects, labelPolygons } = imageData;
     const labelsData: LabelsData = { labelRects, labelPolygons };
     onLabelsDataChange(labelsData);
-    store.dispatch(updateImageDataById(`0`, imageData));
+    store.dispatch(updateImageData(imageData));
     store.dispatch(updateActiveLabelId(labelPolygon.id));
   }
 
@@ -409,8 +409,8 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     const { labelPolygons, labelRects } = imageData;
     const labelsData: LabelsData = { labelRects, labelPolygons };
     onLabelsDataChange(labelsData);
-    store.dispatch(updateImageDataById(`0`, imageData));
     store.dispatch(updateActiveLabelId(activeLabel.id));
+    store.dispatch(updateImageData(imageData));
   }
 
   private discardSuggestedPoint(): void {
@@ -449,7 +449,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
       }),
     };
 
-    store.dispatch(updateImageDataById(`0`, newImageData));
+    store.dispatch(updateImageData(newImageData));
     this.startExistingLabelResize(activeLabel.id, this.suggestedAnchorIndexInPolygon);
     this.discardSuggestedPoint();
   }

@@ -11,7 +11,7 @@ import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
   updateActiveLabelId,
   updateHighlightedLabelId,
-  updateImageDataById,
+  updateImageData,
 } from 'store/labels/actionCreators';
 import { AnnotationData, LabelRect, LabelsData } from 'store/labels/types';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
@@ -124,7 +124,7 @@ export class RectRenderEngine extends BaseRenderEngine {
         const { labelRects, labelPolygons } = imageData;
         const labelsData: LabelsData = { labelRects, labelPolygons };
         onLabelsDataChange(labelsData);
-        store.dispatch(updateImageDataById(`0`, imageData));
+        store.dispatch(updateImageData(imageData));
       }
     }
     this.endRectTransformation();
@@ -282,7 +282,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     const { labelRects, labelPolygons } = imageData;
     const labelsData: LabelsData = { labelRects, labelPolygons };
     onLabelsDataChange(labelsData);
-    store.dispatch(updateImageDataById(`0`, imageData));
+    store.dispatch(updateImageData(imageData));
     store.dispatch(updateActiveLabelId(labelRect.id));
   };
 

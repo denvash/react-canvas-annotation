@@ -1,5 +1,5 @@
 import { Action } from '../Actions';
-import { AnnotationData, LabelsActionTypes, LabelsState } from './types';
+import { LabelsActionTypes, LabelsState } from './types';
 
 const initialState: LabelsState = {
   activeLabelNameId: null,
@@ -33,20 +33,6 @@ export function labelsReducer(state = initialState, action: LabelsActionTypes): 
       return {
         ...state,
         activeLabelType: action.payload.activeLabelType,
-      };
-    }
-    case Action.UPDATE_IMAGE_DATA_BY_ID: {
-      return {
-        ...state,
-        imagesData: state.imagesData.map((imageData: AnnotationData) =>
-          `0` === action.payload.id ? action.payload.newImageData : imageData,
-        ),
-      };
-    }
-    case Action.ADD_IMAGES_DATA: {
-      return {
-        ...state,
-        imagesData: state.imagesData.concat(action.payload.imageData),
       };
     }
     case Action.UPDATE_IMAGES_DATA: {
