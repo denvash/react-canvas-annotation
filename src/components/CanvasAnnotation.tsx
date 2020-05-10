@@ -14,6 +14,7 @@ import {
   updateActiveLabelId,
   updateActiveLabelType,
   updateImageData,
+  updateLabels,
 } from 'store/labels/actionCreators';
 import { AnnotationData } from 'store/labels/types';
 import styled from 'styled-components';
@@ -53,6 +54,10 @@ const CanvasAnnotation: React.FC<ICanvasAnnotation> = ({
   useEffect(() => {
     dispatch(updateImageData(imageData));
   }, [dispatch, imageData]);
+
+  useEffect(() => {
+    dispatch(updateLabels(labels));
+  }, [dispatch, labels]);
 
   useEffect(() => {
     dispatch(updateImageDragModeStatus(isImageDrag));

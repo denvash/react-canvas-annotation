@@ -35,10 +35,22 @@ export function labelsReducer(state = initialState, action: LabelsActionTypes): 
         activeLabelType: action.payload.activeLabelType,
       };
     }
-    case Action.UPDATE_IMAGES_DATA: {
+    case Action.UPDATE_FILE_DATA: {
       return {
         ...state,
-        imageData: action.payload.imageData,
+        imageData: {
+          ...state.imageData,
+          fileData: action.payload.imageData.fileData,
+        },
+      };
+    }
+    case Action.UPDATE_LABELS: {
+      return {
+        ...state,
+        imageData: {
+          ...state.imageData,
+          ...action.payload.labels,
+        },
       };
     }
     default:

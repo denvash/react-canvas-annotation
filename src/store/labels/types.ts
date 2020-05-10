@@ -61,9 +61,15 @@ interface UpdateActiveLabelType {
   };
 }
 interface UpdateImageData {
-  type: typeof Action.UPDATE_IMAGES_DATA;
+  type: typeof Action.UPDATE_FILE_DATA;
   payload: {
     imageData: AnnotationData;
+  };
+}
+interface UpdateLabelsData {
+  type: typeof Action.UPDATE_LABELS;
+  payload: {
+    labels: LabelsData;
   };
 }
 
@@ -72,4 +78,5 @@ export type LabelsActionTypes =
   | UpdateActiveLabelType
   | UpdateImageData
   | UpdateActiveLabelId
-  | UpdateHighlightedLabelId;
+  | UpdateHighlightedLabelId
+  | UpdateLabelsData;
