@@ -11,7 +11,7 @@ import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
   updateActiveLabelId,
   updateHighlightedLabelId,
-  updateImageDataById,
+  updateImageData,
 } from 'store/labels/actionCreators';
 import { AnnotationData, LabelRect, LabelsData } from 'store/labels/types';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
@@ -111,7 +111,7 @@ export class RectRenderEngine extends BaseRenderEngine {
         const scale: number = RenderEngineUtil.calculateImageScale(data);
         const scaledRect: IRect = RectUtil.scaleRect(resizeRect, scale);
 
-        const imageData = LabelsSelector.getActiveImageData();
+        const imageData = LabelsSelector.getImageData();
         imageData.labelRects = imageData.labelRects.map((labelRect: LabelRect) => {
           if (labelRect.id === activeLabelRect.id) {
             return {
@@ -124,7 +124,7 @@ export class RectRenderEngine extends BaseRenderEngine {
         const { labelRects, labelPolygons } = imageData;
         const labelsData: LabelsData = { labelRects, labelPolygons };
         onLabelsDataChange(labelsData);
-        store.dispatch(updateImageDataById(`0`, imageData));
+        store.dispatch(updateImageData(imageData));
       }
     }
     this.endRectTransformation();
@@ -154,7 +154,7 @@ export class RectRenderEngine extends BaseRenderEngine {
 
   public render(data: IEditorData) {
     const activeLabelId: string = LabelsSelector.getActiveLabelId();
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
 
     if (imageData) {
       imageData.labelRects.forEach((labelRect: LabelRect) => {
@@ -273,7 +273,7 @@ export class RectRenderEngine extends BaseRenderEngine {
   }
 
   private addRectLabel = (rect: IRect, onLabelsDataChange) => {
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
     const labelRect: LabelRect = {
       id: uuid.v4(),
       rect,
@@ -282,7 +282,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     const { labelRects, labelPolygons } = imageData;
     const labelsData: LabelsData = { labelRects, labelPolygons };
     onLabelsDataChange(labelsData);
-    store.dispatch(updateImageDataById(`0`, imageData));
+    store.dispatch(updateImageData(imageData));
     store.dispatch(updateActiveLabelId(labelRect.id));
   };
 
@@ -292,7 +292,7 @@ export class RectRenderEngine extends BaseRenderEngine {
       return activeRectLabel;
     }
 
-    const labelRects: LabelRect[] = LabelsSelector.getActiveImageData().labelRects;
+    const labelRects: LabelRect[] = LabelsSelector.getImageData().labelRects;
     for (let i = 0; i < labelRects.length; i++) {
       if (this.isMouseOverRectEdges(labelRects[i].rect, data)) {
         return labelRects[i];
@@ -344,7 +344,7 @@ export class RectRenderEngine extends BaseRenderEngine {
   }
 
   private getAnchorUnderMouse(data: IEditorData): RectAnchor {
-    const labelRects: LabelRect[] = LabelsSelector.getActiveImageData().labelRects;
+    const labelRects: LabelRect[] = LabelsSelector.getImageData().labelRects;
     for (let i = 0; i < labelRects.length; i++) {
       const rect: IRect = this.calculateRectRelativeToActiveImage(labelRects[i].rect, data);
       const rectAnchor = this.getAnchorUnderMouseByRect(

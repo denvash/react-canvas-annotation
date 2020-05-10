@@ -1,4 +1,4 @@
-import { ISize } from '../interfaces/ISize';
+import { ISize } from 'interfaces';
 import { Settings } from './Settings';
 
 export class RenderEngineConfig {
@@ -18,5 +18,4 @@ export class RenderEngineConfig {
     height: 100,
   };
   public readonly activeAnchorColor: string = Settings.SECONDARY_COLOR;
-  public readonly inactiveAnchorColor: string = Settings.DARK_THEME_SECOND_COLOR;
 }

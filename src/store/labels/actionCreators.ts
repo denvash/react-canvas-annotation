@@ -1,6 +1,6 @@
 import { LabelType } from '../../interfaces/enums/LabelType';
 import { Action } from '../Actions';
-import { AnnotationData, LabelName, LabelsActionTypes } from './types';
+import { AnnotationData, LabelsActionTypes, LabelsData } from './types';
 
 export function updateActiveLabelNameId(activeLabelNameId: string): LabelsActionTypes {
   return {
@@ -38,48 +38,20 @@ export function updateActiveLabelType(activeLabelType: LabelType): LabelsActionT
   };
 }
 
-export function updateImageDataById(id: string, newImageData: AnnotationData): LabelsActionTypes {
+export function updateImageData(imageData: AnnotationData): LabelsActionTypes {
   return {
-    type: Action.UPDATE_IMAGE_DATA_BY_ID,
-    payload: {
-      id,
-      newImageData,
-    },
-  };
-}
-
-export function addImageData(imageData: AnnotationData[]): LabelsActionTypes {
-  return {
-    type: Action.ADD_IMAGES_DATA,
+    type: Action.UPDATE_FILE_DATA,
     payload: {
       imageData,
     },
   };
 }
 
-export function updateImageData(imageData: AnnotationData[]): LabelsActionTypes {
+export function updateLabels(labels: LabelsData): LabelsActionTypes {
   return {
-    type: Action.UPDATE_IMAGES_DATA,
-    payload: {
-      imageData,
-    },
-  };
-}
-
-export function updateLabelNames(labels: LabelName[]) {
-  return {
-    type: Action.UPDATE_LABEL_NAMES,
+    type: Action.UPDATE_LABELS,
     payload: {
       labels,
-    },
-  };
-}
-
-export function updateFirstLabelCreatedFlag(firstLabelCreatedFlag: boolean) {
-  return {
-    type: Action.UPDATE_FIRST_LABEL_CREATED_FLAG,
-    payload: {
-      firstLabelCreatedFlag,
     },
   };
 }

@@ -1,14 +1,12 @@
 import { Action } from '../Actions';
-import { AnnotationData, LabelsActionTypes, LabelsState } from './types';
+import { LabelsActionTypes, LabelsState } from './types';
 
 const initialState: LabelsState = {
   activeLabelNameId: null,
   activeLabelType: null,
   activeLabelId: null,
   highlightedLabelId: null,
-  imagesData: [],
-  firstLabelCreatedFlag: false,
-  labels: [],
+  imageData: null,
 };
 
 export function labelsReducer(state = initialState, action: LabelsActionTypes): LabelsState {
@@ -37,30 +35,22 @@ export function labelsReducer(state = initialState, action: LabelsActionTypes): 
         activeLabelType: action.payload.activeLabelType,
       };
     }
-    case Action.UPDATE_IMAGE_DATA_BY_ID: {
+    case Action.UPDATE_FILE_DATA: {
       return {
         ...state,
-        imagesData: state.imagesData.map((imageData: AnnotationData) =>
-          `0` === action.payload.id ? action.payload.newImageData : imageData,
-        ),
+        imageData: {
+          ...state.imageData,
+          fileData: action.payload.imageData.fileData,
+        },
       };
     }
-    case Action.ADD_IMAGES_DATA: {
+    case Action.UPDATE_LABELS: {
       return {
         ...state,
-        imagesData: state.imagesData.concat(action.payload.imageData),
-      };
-    }
-    case Action.UPDATE_IMAGES_DATA: {
-      return {
-        ...state,
-        imagesData: action.payload.imageData,
-      };
-    }
-    case Action.UPDATE_LABEL_NAMES: {
-      return {
-        ...state,
-        labels: action.payload.labels,
+        imageData: {
+          ...state.imageData,
+          ...action.payload.labels,
+        },
       };
     }
     default:

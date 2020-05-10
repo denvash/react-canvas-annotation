@@ -46,8 +46,8 @@ export class EditorActions {
 
   public static fullRender() {
     DrawUtil.clearCanvas(EditorModel.canvas);
-    EditorModel.primaryRenderingEngine.render();
-    EditorModel?.supportRenderingEngine.render(EditorActions.getEditorData());
+    EditorModel?.primaryRenderingEngine?.render();
+    EditorModel?.supportRenderingEngine?.render(EditorActions.getEditorData());
   }
 
   // =================================================================================================================

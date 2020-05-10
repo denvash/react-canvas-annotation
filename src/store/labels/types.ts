@@ -13,11 +13,6 @@ export type LabelPolygon = {
   vertices: IPoint[];
 };
 
-export type LabelName = {
-  name: string;
-  id: string;
-};
-
 export type AnnotationData = {
   fileData: File;
   loadStatus: boolean;
@@ -35,9 +30,7 @@ export type LabelsState = {
   activeLabelType: LabelType;
   activeLabelId: string;
   highlightedLabelId: string;
-  imagesData: AnnotationData[];
-  firstLabelCreatedFlag: boolean;
-  labels: LabelName[];
+  imageData: AnnotationData;
 };
 
 interface UpdateActiveLabelNameId {
@@ -67,42 +60,23 @@ interface UpdateActiveLabelType {
     activeLabelType: LabelType;
   };
 }
-
-interface UpdateImageDataById {
-  type: typeof Action.UPDATE_IMAGE_DATA_BY_ID;
-  payload: {
-    id: string;
-    newImageData: AnnotationData;
-  };
-}
-
-interface AddImageData {
-  type: typeof Action.ADD_IMAGES_DATA;
-  payload: {
-    imageData: AnnotationData[];
-  };
-}
-
 interface UpdateImageData {
-  type: typeof Action.UPDATE_IMAGES_DATA;
+  type: typeof Action.UPDATE_FILE_DATA;
   payload: {
-    imageData: AnnotationData[];
+    imageData: AnnotationData;
   };
 }
-
-interface UpdateLabelNames {
-  type: typeof Action.UPDATE_LABEL_NAMES;
+interface UpdateLabelsData {
+  type: typeof Action.UPDATE_LABELS;
   payload: {
-    labels: LabelName[];
+    labels: LabelsData;
   };
 }
 
 export type LabelsActionTypes =
   | UpdateActiveLabelNameId
   | UpdateActiveLabelType
-  | UpdateImageDataById
-  | AddImageData
   | UpdateImageData
-  | UpdateLabelNames
   | UpdateActiveLabelId
-  | UpdateHighlightedLabelId;
+  | UpdateHighlightedLabelId
+  | UpdateLabelsData;

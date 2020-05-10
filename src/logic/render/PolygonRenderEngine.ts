@@ -12,7 +12,7 @@ import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
   updateActiveLabelId,
   updateHighlightedLabelId,
-  updateImageDataById,
+  updateImageData,
 } from 'store/labels/actionCreators';
 import { AnnotationData, LabelPolygon, LabelsData } from 'store/labels/types';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
@@ -158,7 +158,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   // =================================================================================================================
 
   public render(data: IEditorData): void {
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
     if (imageData) {
       this.drawExistingLabels(data);
       this.drawActivelyCreatedLabel(data);
@@ -254,7 +254,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   private drawExistingLabels(data: IEditorData) {
     const activeLabelId: string = LabelsSelector.getActiveLabelId();
     const highlightedLabelId: string = LabelsSelector.getHighlightedLabelId();
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
     imageData.labelPolygons.forEach((labelPolygon: LabelPolygon) => {
       const isActive: boolean =
         labelPolygon.id === activeLabelId || labelPolygon.id === highlightedLabelId;
@@ -351,7 +351,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   }
 
   private addPolygonLabel(polygon: IPoint[], onLabelsDataChange) {
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
     const labelPolygon: LabelPolygon = {
       id: uuid.v4(),
       vertices: polygon,
@@ -360,7 +360,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     const { labelRects, labelPolygons } = imageData;
     const labelsData: LabelsData = { labelRects, labelPolygons };
     onLabelsDataChange(labelsData);
-    store.dispatch(updateImageDataById(`0`, imageData));
+    store.dispatch(updateImageData(imageData));
     store.dispatch(updateActiveLabelId(labelPolygon.id));
   }
 
@@ -381,7 +381,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   }
 
   private applyResizeToPolygonLabel(data: IEditorData, onLabelsDataChange) {
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
     const activeLabel: LabelPolygon = LabelsSelector.getActivePolygonLabel();
     imageData.labelPolygons = imageData.labelPolygons.map((polygon: LabelPolygon) => {
       if (polygon.id !== activeLabel.id) {
@@ -409,8 +409,8 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     const { labelPolygons, labelRects } = imageData;
     const labelsData: LabelsData = { labelRects, labelPolygons };
     onLabelsDataChange(labelsData);
-    store.dispatch(updateImageDataById(`0`, imageData));
     store.dispatch(updateActiveLabelId(activeLabel.id));
+    store.dispatch(updateImageData(imageData));
   }
 
   private discardSuggestedPoint(): void {
@@ -423,7 +423,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   // =================================================================================================================
 
   private addSuggestedAnchorToPolygonLabel(data: IEditorData) {
-    const imageData: AnnotationData = LabelsSelector.getActiveImageData();
+    const imageData: AnnotationData = LabelsSelector.getImageData();
     const activeLabel: LabelPolygon = LabelsSelector.getActivePolygonLabel();
     const newAnchorPositionOnImage: IPoint = RenderEngineUtil.transferPointFromViewPortContentToImage(
       this.suggestedAnchorPositionOnCanvas,
@@ -449,7 +449,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
       }),
     };
 
-    store.dispatch(updateImageDataById(`0`, newImageData));
+    store.dispatch(updateImageData(newImageData));
     this.startExistingLabelResize(activeLabel.id, this.suggestedAnchorIndexInPolygon);
     this.discardSuggestedPoint();
   }
@@ -517,7 +517,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   // =================================================================================================================
 
   private getPolygonUnderMouse(data: IEditorData): LabelPolygon {
-    const labelPolygons: LabelPolygon[] = LabelsSelector.getActiveImageData().labelPolygons;
+    const labelPolygons: LabelPolygon[] = LabelsSelector.getImageData().labelPolygons;
     for (let i = 0; i < labelPolygons.length; i++) {
       const pathOnCanvas: IPoint[] = RenderEngineUtil.transferPolygonFromImageToViewPortContent(
         labelPolygons[i].vertices,
@@ -538,7 +538,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   }
 
   private getAnchorUnderMouse(data: IEditorData): IPoint {
-    const labelPolygons: LabelPolygon[] = LabelsSelector.getActiveImageData().labelPolygons;
+    const labelPolygons: LabelPolygon[] = LabelsSelector.getImageData().labelPolygons;
     for (let i = 0; i < labelPolygons.length; i++) {
       const pathOnCanvas: IPoint[] = RenderEngineUtil.transferPolygonFromImageToViewPortContent(
         labelPolygons[i].vertices,
