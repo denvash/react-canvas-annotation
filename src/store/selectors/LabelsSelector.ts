@@ -8,10 +8,6 @@ export class LabelsSelector {
     return store.getState().labels.labels;
   }
 
-  public static getActiveLabelNameId(): string {
-    return store.getState().labels.activeLabelNameId;
-  }
-
   public static getActiveLabelType(): LabelType {
     return store.getState().labels.activeLabelType;
   }

@@ -75,41 +75,35 @@ const CanvasAnnotation: React.FC<ICanvasAnnotation> = ({
   });
 
   return (
-    <Container className={className}>
-      <EditorWrapper>
-        {imageData && (
-          <Editor ref={ref => (EditorModel.editor = ref)} draggable={false}>
-            <Scrollbars
-              ref={ref => (EditorModel.viewPortScrollbars = ref)}
-              renderTrackHorizontal={props => <NoCursorTrack {...props} />}
-              renderTrackVertical={props => <NoCursorTrack {...props} />}
-              draggable={false}>
-              <Canvas
-                ref={ref => (EditorModel.canvas = ref)}
-                draggable={false}
-                onContextMenu={onContextMenu}
-              />
-            </Scrollbars>
-            <MouseIndicator
-              ref={ref => (EditorModel.mousePositionIndicator = ref)}
-              draggable={false}
-            />
-            <Cursor
-              isGrabbing={customCursorStyle === CursorType.GRABBING}
-              isTransform={customCursorStyle !== CursorType.DEFAULT}
-              ref={ref => (EditorModel.cursor = ref)}
-              draggable={false}>
-              <Icon d={IconPaths[customCursorStyle]} />
-            </Cursor>
-          </Editor>
-        )}
-      </EditorWrapper>
-    </Container>
+    imageData && (
+      <Editor className={className} ref={ref => (EditorModel.editor = ref)} draggable={false}>
+        <Scrollbars
+          ref={ref => (EditorModel.viewPortScrollbars = ref)}
+          renderTrackHorizontal={props => <NoCursorTrack {...props} />}
+          renderTrackVertical={props => <NoCursorTrack {...props} />}
+          draggable={false}>
+          <Canvas
+            ref={ref => (EditorModel.canvas = ref)}
+            draggable={false}
+            onContextMenu={onContextMenu}
+          />
+        </Scrollbars>
+        <MouseIndicator ref={ref => (EditorModel.mousePositionIndicator = ref)} draggable={false} />
+        <Cursor
+          isGrabbing={customCursorStyle === CursorType.GRABBING}
+          isTransform={customCursorStyle !== CursorType.DEFAULT}
+          ref={ref => (EditorModel.cursor = ref)}
+          draggable={false}>
+          <Icon d={IconPaths[customCursorStyle]} />
+        </Cursor>
+      </Editor>
+    )
   );
 };
 
-const EditorWrapper = tw.div`flex flex-col w-full h-full self-stretch`;
-const Container = tw.div`h-full w-full self-stretch flex flex-col`;
+const Editor = styled.div`
+  ${tw`w-full h-full relative`}
+`;
 
 const Canvas = styled.canvas`
   ${tw`absolute cursor-none`}
@@ -135,14 +129,9 @@ const Cursor = styled.div<ICursor>`
   ${ifProp(`isGrabbing`, tw`scale-250`)}
 `;
 
-const Editor = styled.div`
-  ${tw`flex-grow relative`}
-`;
-
 const NoCursorTrack = styled.div`
-  ${tw`pointer-events-none`}
-  cursor: none;
+  ${tw`pointer-events-none cursor-none`}
 `;
 
-export const className = Container;
+export const className = Editor;
 export default CanvasAnnotation;

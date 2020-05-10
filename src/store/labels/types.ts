@@ -1,4 +1,3 @@
-import { LabelStatus } from '../../interfaces/enums/LabelStatus';
 import { LabelType } from '../../interfaces/enums/LabelType';
 import { IPoint } from '../../interfaces/IPoint';
 import { IRect } from '../../interfaces/IRect';
@@ -7,17 +6,11 @@ import { Action } from '../Actions';
 export type LabelRect = {
   // GENERAL
   id: string;
-  labelId: string;
   rect: IRect;
-
-  // AI
-  status: LabelStatus;
-  suggestedLabel: string;
 };
 
 export type LabelPolygon = {
   id: string;
-  labelId: string;
   vertices: IPoint[];
 };
 

@@ -22,7 +22,7 @@ export abstract class BaseRenderEngine {
           this.mouseUpHandler(data, onLabelsDataChange);
           break;
         case EventType.MOUSE_DOWN:
-          this.mouseDownHandler(data);
+          this.mouseDownHandler(data, onLabelsDataChange);
           break;
         default:
           break;
@@ -30,7 +30,10 @@ export abstract class BaseRenderEngine {
     }
   }
 
-  protected abstract mouseDownHandler(data: IEditorData): void;
+  protected abstract mouseDownHandler(
+    data: IEditorData,
+    onLabelsDataChange?: (labelsData: LabelsData) => void,
+  ): void;
   protected abstract mouseMoveHandler(data: IEditorData): void;
   protected abstract mouseUpHandler(
     data: IEditorData,

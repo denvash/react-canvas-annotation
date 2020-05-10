@@ -7,7 +7,18 @@ import tw from 'twin.macro';
 import image from './img.jpg';
 
 const labelsDataDefault = {
-  labelRects: [],
+  labelRects: [
+    {
+      id: 'fb112202-83d3-44e7-bacd-d4706a3895a7',
+      labelId: null,
+      rect: {
+        x: 697.2371134020618,
+        y: 454.26804123711344,
+        width: 717.0309278350516,
+        height: 492.1237113402062,
+      },
+    },
+  ],
   labelPolygons: [],
 };
 
@@ -35,6 +46,7 @@ const App = () => {
       const res = await fetch(image);
       const buffer = await res.arrayBuffer();
       const file = new File([buffer], `img.jpg`, { type: `image/jpg` });
+      console.info(`file uploaded`, file);
       setImageFile(file);
     };
     fetchImage();
@@ -72,7 +84,7 @@ const App = () => {
 
 const Container = styled.main`
   ${tw`flex flex-col items-center justify-center overflow-hidden`}
-  ${className} {
+  > ${className} {
     ${tw`border border-gray-500`}
   }
 `;

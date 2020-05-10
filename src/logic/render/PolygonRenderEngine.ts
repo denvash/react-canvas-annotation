@@ -56,7 +56,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
           this.mouseUpHandler(data, onLabelsDataChange);
           break;
         case EventType.MOUSE_DOWN:
-          this.mouseDownHandler(data);
+          this.mouseDownHandler(data, onLabelsDataChange);
           break;
         default:
           break;
@@ -64,7 +64,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     }
   }
 
-  public mouseDownHandler(data: IEditorData): void {
+  public mouseDownHandler(data: IEditorData, onLabelsDataChange): void {
     const isMouseOverCanvas: boolean = RenderEngineUtil.isMouseOverCanvas(data);
     if (isMouseOverCanvas) {
       if (this.isCreationInProgress()) {
@@ -73,7 +73,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
           this.activePath[0],
         );
         if (isMouseOverStartAnchor) {
-          this.addLabelAndFinishCreation(data);
+          this.addLabelAndFinishCreation(data, onLabelsDataChange);
         } else {
           this.updateActivelyCreatedLabel(data);
         }
@@ -339,26 +339,27 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     EditorActions.setViewPortActionsDisabledStatus(false);
   }
 
-  public addLabelAndFinishCreation(data: IEditorData) {
+  public addLabelAndFinishCreation(data: IEditorData, onLabelsDataChange) {
     if (this.isCreationInProgress() && this.activePath.length > 2) {
       const polygonOnImage: IPoint[] = RenderEngineUtil.transferPolygonFromViewPortContentToImage(
         this.activePath,
         data,
       );
-      this.addPolygonLabel(polygonOnImage);
+      this.addPolygonLabel(polygonOnImage, onLabelsDataChange);
       this.finishLabelCreation();
     }
   }
 
-  private addPolygonLabel(polygon: IPoint[]) {
-    const activeLabelId = LabelsSelector.getActiveLabelNameId();
+  private addPolygonLabel(polygon: IPoint[], onLabelsDataChange) {
     const imageData: AnnotationData = LabelsSelector.getActiveImageData();
     const labelPolygon: LabelPolygon = {
       id: uuid.v4(),
-      labelId: activeLabelId,
       vertices: polygon,
     };
     imageData.labelPolygons.push(labelPolygon);
+    const { labelRects, labelPolygons } = imageData;
+    const labelsData: LabelsData = { labelRects, labelPolygons };
+    onLabelsDataChange(labelsData);
     store.dispatch(updateImageDataById(`0`, imageData));
     store.dispatch(updateActiveLabelId(labelPolygon.id));
   }
