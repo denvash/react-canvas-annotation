@@ -2,7 +2,7 @@ import { CursorType } from 'interfaces/enums/CursorType';
 import { EventType } from 'interfaces/enums/EventType';
 import { IEditorData } from 'interfaces/IEditorData';
 import { IPoint } from 'interfaces/IPoint';
-import { ViewPortActions } from 'logic/actions/ViewPortActions';
+import { ViewPortActions } from 'logic/ViewPortActions';
 import { EditorModel } from 'model/EditorModel';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';

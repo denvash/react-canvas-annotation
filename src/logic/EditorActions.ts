@@ -1,58 +1,23 @@
-import { CursorType } from 'interfaces/enums/CursorType';
-import { LabelType } from 'interfaces/enums/LabelType';
-import { IEditorData } from 'interfaces/IEditorData';
-import { IPoint } from 'interfaces/IPoint';
-import { IRect } from 'interfaces/IRect';
-import { ISize } from 'interfaces/ISize';
-import { ViewPortHelper } from 'logic/helpers/ViewPortHelper';
-import { PolygonRenderEngine } from 'logic/render/PolygonRenderEngine';
-import { PrimaryEditorRenderEngine } from 'logic/render/PrimaryEditorRenderEngine';
-import { RectRenderEngine } from 'logic/render/RectRenderEngine';
-import { EditorModel } from 'model/EditorModel';
-import React from 'react';
-import { GeneralSelector } from 'store/selectors/GeneralSelector';
-import { CanvasUtil } from 'utils/CanvasUtil';
-import { DrawUtil } from 'utils/DrawUtil';
-import { ImageUtil } from 'utils/ImageUtil';
-import { PointUtil } from 'utils/PointUtil';
-import { RectUtil } from 'utils/RectUtil';
+import { IEditorData, IPoint, IRect, ISize } from 'interfaces';
+import { CursorType } from 'interfaces/enums';
+import { EditorModel } from 'model';
+import { GeneralSelector } from 'store/selectors';
+import { CanvasUtil, DrawUtil, ImageUtil, PointUtil, RectUtil } from 'utils';
+import { PrimaryEngine } from './engines';
 import { ViewPortActions } from './ViewPortActions';
+import { ViewPortHelper } from './ViewPortHelper';
 
 export class EditorActions {
-  // =================================================================================================================
-  // RENDER ENGINES
-  // =================================================================================================================
-
-  public static mountSupportRenderingEngine(activeLabelType: LabelType) {
-    EditorModel.supportRenderingEngine =
-      activeLabelType === LabelType.RECTANGLE
-        ? new RectRenderEngine(EditorModel.canvas)
-        : new PolygonRenderEngine(EditorModel.canvas);
-  }
-
-  public static swapSupportRenderingEngine(activeLabelType: LabelType) {
-    EditorActions.mountSupportRenderingEngine(activeLabelType);
-  }
-
-  public static mountRenderEnginesAndHelpers(activeLabelType: LabelType) {
+  public static mountRenderEnginesAndHelpers() {
     EditorModel.viewPortHelper = new ViewPortHelper();
-    EditorModel.primaryRenderingEngine = new PrimaryEditorRenderEngine(EditorModel.canvas);
-    EditorActions.mountSupportRenderingEngine(activeLabelType);
+    EditorModel.primaryRenderingEngine = new PrimaryEngine(EditorModel.canvas);
   }
-
-  // =================================================================================================================
-  // RENDER
-  // =================================================================================================================
 
   public static fullRender() {
     DrawUtil.clearCanvas(EditorModel.canvas);
     EditorModel?.primaryRenderingEngine?.render();
     EditorModel?.supportRenderingEngine?.render(EditorActions.getEditorData());
   }
-
-  // =================================================================================================================
-  // SETTERS
-  // =================================================================================================================
 
   public static setLoadingStatus(status: boolean) {
     EditorModel.isLoading = status;
@@ -64,10 +29,6 @@ export class EditorActions {
   public static setViewPortActionsDisabledStatus(status: boolean) {
     EditorModel.viewPortActionsDisabled = status;
   }
-
-  // =================================================================================================================
-  // GETTERS
-  // =================================================================================================================
 
   public static getEditorData(event?: Event): IEditorData {
     return {
@@ -82,10 +43,6 @@ export class EditorActions {
       absoluteViewPortContentScrollPosition: ViewPortActions.getAbsoluteScrollPosition(),
     };
   }
-
-  // =================================================================================================================
-  // HELPERS
-  // =================================================================================================================
 
   public static updateMousePositionIndicator(
     event: React.MouseEvent<HTMLCanvasElement, MouseEvent> | MouseEvent,

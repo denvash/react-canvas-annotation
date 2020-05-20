@@ -1,7 +1,7 @@
 import { RENDER_ENGINE } from 'config';
 import { IEditorData, ILine, IPoint, IRect } from 'interfaces';
 import { CursorType, EventType, LabelType } from 'interfaces/enums';
-import { EditorActions } from 'logic/actions/EditorActions';
+import { EditorActions } from 'logic/EditorActions';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
@@ -13,9 +13,9 @@ import { AnnotationData, LabelPolygon, LabelsData } from 'store/labels/types';
 import { GeneralSelector, LabelsSelector } from 'store/selectors';
 import { DrawUtil, LineUtil, MouseEventUtil, RectUtil, RenderEngineUtil } from 'utils';
 import uuid from 'uuid';
-import { BaseRenderEngine } from './BaseRenderEngine';
+import { BaseEngine } from './BaseEngine';
 
-export class PolygonRenderEngine extends BaseRenderEngine {
+export class PolygonEngine extends BaseEngine {
   private config: typeof RENDER_ENGINE = RENDER_ENGINE;
   private activePath: IPoint[] = [];
   private resizeAnchorIndex: number = null;

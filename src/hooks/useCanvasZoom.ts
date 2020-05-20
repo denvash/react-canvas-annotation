@@ -1,6 +1,6 @@
 import { IPoint } from 'interfaces/IPoint';
-import { EditorActions } from 'logic/actions/EditorActions';
-import { ViewPortActions } from 'logic/actions/ViewPortActions';
+import { EditorActions } from 'logic/EditorActions';
+import { ViewPortActions } from 'logic/ViewPortActions';
 import { EditorModel } from 'model/EditorModel';
 import { useEffect, useRef } from 'react';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';

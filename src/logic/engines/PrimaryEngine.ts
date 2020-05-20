@@ -1,9 +1,9 @@
 import { IRect } from 'interfaces/IRect';
-import { ViewPortActions } from 'logic/actions/ViewPortActions';
+import { ViewPortActions } from 'logic/ViewPortActions';
 import { EditorModel } from 'model/EditorModel';
-import { BaseRenderEngine } from './BaseRenderEngine';
+import { BaseEngine } from './BaseEngine';
 
-export class PrimaryEditorRenderEngine extends BaseRenderEngine {
+export class PrimaryEngine extends BaseEngine {
   public constructor(canvas: HTMLCanvasElement) {
     super(canvas);
   }

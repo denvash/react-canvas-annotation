@@ -3,7 +3,7 @@ import { EventType, LabelType } from 'interfaces/enums';
 import { LabelsData } from 'store/labels/types';
 import { MouseEventUtil } from 'utils/MouseEventUtil';
 
-export abstract class BaseRenderEngine {
+export abstract class BaseEngine {
   protected readonly canvas: HTMLCanvasElement;
   public labelType: LabelType;
 

@@ -1,8 +1,9 @@
 import { EventType } from 'interfaces/enums/EventType';
 import { LabelType } from 'interfaces/enums/LabelType';
 import { IEditorData } from 'interfaces/IEditorData';
-import { EditorActions } from 'logic/actions/EditorActions';
-import { ViewPortActions } from 'logic/actions/ViewPortActions';
+import { PolygonEngine, RectEngine } from 'logic';
+import { EditorActions } from 'logic/EditorActions';
+import { ViewPortActions } from 'logic/ViewPortActions';
 import { EditorModel } from 'model/EditorModel';
 import { useEffect } from 'react';
 import { AnnotationData, LabelsData } from 'store/labels/types';
@@ -94,7 +95,11 @@ const useCanvasListeners = ({
   }, [imageData]);
 
   useEffect(() => {
-    EditorActions.mountRenderEnginesAndHelpers(annotationType);
+    EditorActions.mountRenderEnginesAndHelpers();
+    EditorModel.supportRenderingEngine =
+      annotationType === LabelType.RECTANGLE
+        ? new RectEngine(EditorModel.canvas)
+        : new PolygonEngine(EditorModel.canvas);
   }, [annotationType]);
 };
 

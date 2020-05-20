@@ -1,7 +1,6 @@
 import { RENDER_ENGINE } from 'config';
 import { IEditorData, IPoint, IRect, IRectAnchor } from 'interfaces';
 import { CursorType, LabelType } from 'interfaces/enums';
-import { EditorActions } from 'logic/actions/EditorActions';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
@@ -13,9 +12,10 @@ import { AnnotationData, LabelRect, LabelsData } from 'store/labels/types';
 import { GeneralSelector, LabelsSelector } from 'store/selectors';
 import { DrawUtil, PointUtil, RectUtil, RenderEngineUtil } from 'utils';
 import uuid from 'uuid';
-import { BaseRenderEngine } from './BaseRenderEngine';
+import { EditorActions } from '../EditorActions';
+import { BaseEngine } from './BaseEngine';
 
-export class RectRenderEngine extends BaseRenderEngine {
+export class RectEngine extends BaseEngine {
   private config: typeof RENDER_ENGINE = RENDER_ENGINE;
   private startCreateRectPoint: IPoint;
   private startResizeRectAnchor: IRectAnchor;

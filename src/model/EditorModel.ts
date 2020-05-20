@@ -2,9 +2,9 @@ import Scrollbars from 'react-custom-scrollbars';
 import { IPoint } from '../interfaces/IPoint';
 import { IRect } from '../interfaces/IRect';
 import { ISize } from '../interfaces/ISize';
-import { ViewPortHelper } from '../logic/helpers/ViewPortHelper';
-import { BaseRenderEngine } from '../logic/render/BaseRenderEngine';
-import { PrimaryEditorRenderEngine } from '../logic/render/PrimaryEditorRenderEngine';
+import { BaseEngine } from '../logic/engines/BaseEngine';
+import { PrimaryEngine } from '../logic/engines/PrimaryEngine';
+import { ViewPortHelper } from '../logic/ViewPortHelper';
 
 export class EditorModel {
   public static editor: HTMLDivElement;
@@ -14,8 +14,8 @@ export class EditorModel {
   public static viewPortScrollbars: Scrollbars;
   public static image: HTMLImageElement;
 
-  public static primaryRenderingEngine: PrimaryEditorRenderEngine;
-  public static supportRenderingEngine: BaseRenderEngine;
+  public static primaryRenderingEngine: PrimaryEngine;
+  public static supportRenderingEngine: BaseEngine;
 
   public static viewPortHelper: ViewPortHelper;
 
