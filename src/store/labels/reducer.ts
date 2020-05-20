@@ -2,7 +2,6 @@ import { Action } from '../Actions';
 import { LabelsActionTypes, LabelsState } from './types';
 
 const initialState: LabelsState = {
-  activeLabelNameId: null,
   activeLabelType: null,
   activeLabelId: null,
   highlightedLabelId: null,
@@ -11,12 +10,6 @@ const initialState: LabelsState = {
 
 export function labelsReducer(state = initialState, action: LabelsActionTypes): LabelsState {
   switch (action.type) {
-    case Action.UPDATE_ACTIVE_LABEL_NAME_ID: {
-      return {
-        ...state,
-        activeLabelNameId: action.payload.activeLabelNameId,
-      };
-    }
     case Action.UPDATE_ACTIVE_LABEL_ID: {
       return {
         ...state,

@@ -26,19 +26,11 @@ export type LabelsData = {
 };
 
 export type LabelsState = {
-  activeLabelNameId: string;
   activeLabelType: LabelType;
   activeLabelId: string;
   highlightedLabelId: string;
   imageData: AnnotationData;
 };
-
-interface UpdateActiveLabelNameId {
-  type: typeof Action.UPDATE_ACTIVE_LABEL_NAME_ID;
-  payload: {
-    activeLabelNameId: string;
-  };
-}
 
 interface UpdateActiveLabelId {
   type: typeof Action.UPDATE_ACTIVE_LABEL_ID;
@@ -74,7 +66,6 @@ interface UpdateLabelsData {
 }
 
 export type LabelsActionTypes =
-  | UpdateActiveLabelNameId
   | UpdateActiveLabelType
   | UpdateImageData
   | UpdateActiveLabelId

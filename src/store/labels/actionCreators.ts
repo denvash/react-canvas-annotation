@@ -2,15 +2,6 @@ import { LabelType } from '../../interfaces/enums/LabelType';
 import { Action } from '../Actions';
 import { AnnotationData, LabelsActionTypes, LabelsData } from './types';
 
-export function updateActiveLabelNameId(activeLabelNameId: string): LabelsActionTypes {
-  return {
-    type: Action.UPDATE_ACTIVE_LABEL_NAME_ID,
-    payload: {
-      activeLabelNameId,
-    },
-  };
-}
-
 export function updateActiveLabelId(activeLabelId: string): LabelsActionTypes {
   return {
     type: Action.UPDATE_ACTIVE_LABEL_ID,

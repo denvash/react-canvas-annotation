@@ -14,6 +14,8 @@ interface IProps {
   imageData: AnnotationData;
   imageDragMode: boolean;
   onLabelsDataChange?: (labelsData: LabelsData) => void;
+  onHover?: (string) => void;
+  onClick?: (string) => void;
 }
 
 const NOOP = () => {};
@@ -23,6 +25,8 @@ const useCanvasListeners = ({
   annotationType,
   imageDragMode,
   onLabelsDataChange = NOOP,
+  onHover,
+  onClick,
 }: IProps) => {
   useEffect(() => {
     const update = (event: MouseEvent) => {
@@ -37,7 +41,7 @@ const useCanvasListeners = ({
       if (imageDragMode) {
         EditorModel.viewPortHelper.update(editorData);
       } else {
-        EditorModel?.supportRenderingEngine.update(editorData, onLabelsDataChange);
+        EditorModel?.supportRenderingEngine.update(editorData, onLabelsDataChange, onHover);
       }
 
       EditorActions.updateMousePositionIndicator(event);
@@ -53,7 +57,7 @@ const useCanvasListeners = ({
       window.removeEventListener(EventType.MOUSE_UP, update);
       EditorModel.canvas.removeEventListener(EventType.MOUSE_DOWN, update);
     };
-  }, [imageDragMode, onLabelsDataChange]);
+  }, [imageDragMode, onClick, onHover, onLabelsDataChange]);
 
   useEffect(() => {
     const updateModelAndRender = () => {

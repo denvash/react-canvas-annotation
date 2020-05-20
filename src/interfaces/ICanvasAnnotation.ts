@@ -9,4 +9,6 @@ export interface ICanvasAnnotation {
   onChange?: (labelsData: LabelsData) => void;
   zoom?: number;
   isImageDrag?: boolean;
+  onHover?: (string) => void;
+  onClick?: (labelsData: LabelsData) => void;
 }

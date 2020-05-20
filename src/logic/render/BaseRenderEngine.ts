@@ -12,11 +12,15 @@ export abstract class BaseRenderEngine {
     this.canvas = canvas;
   }
 
-  public update(data: IEditorData, onLabelsDataChange?: (labelsData: LabelsData) => void): void {
+  public update(
+    data: IEditorData,
+    onLabelsDataChange?: (labelsData: LabelsData) => void,
+    onHover?: (string) => void,
+  ): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
         case EventType.MOUSE_MOVE:
-          this.mouseMoveHandler(data);
+          this.mouseMoveHandler(data, onHover);
           break;
         case EventType.MOUSE_UP:
           this.mouseUpHandler(data, onLabelsDataChange);
@@ -34,7 +38,7 @@ export abstract class BaseRenderEngine {
     data: IEditorData,
     onLabelsDataChange?: (labelsData: LabelsData) => void,
   ): void;
-  protected abstract mouseMoveHandler(data: IEditorData): void;
+  protected abstract mouseMoveHandler(data: IEditorData, onHover?: (string) => void): void;
   protected abstract mouseUpHandler(
     data: IEditorData,
     onLabelsDataChange?: (labelsData: LabelsData) => void,

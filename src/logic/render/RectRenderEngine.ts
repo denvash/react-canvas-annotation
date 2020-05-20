@@ -130,13 +130,14 @@ export class RectRenderEngine extends BaseRenderEngine {
     this.endRectTransformation();
   };
 
-  public mouseMoveHandler = (data: IEditorData) => {
+  public mouseMoveHandler = (data: IEditorData, onHover?: (string) => void) => {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.startResizeRectAnchor) {
         const labelRect: LabelRect = this.getRectUnderMouse(data);
         if (!!labelRect && !this.isInProgress()) {
           if (LabelsSelector.getHighlightedLabelId() !== labelRect.id) {
+            onHover(labelRect.id);
             store.dispatch(updateHighlightedLabelId(labelRect.id));
           }
         } else {

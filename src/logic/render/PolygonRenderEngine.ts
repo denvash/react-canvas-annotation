@@ -46,11 +46,15 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   // EVENT HANDLERS
   // =================================================================================================================
 
-  public update(data: IEditorData, onLabelsDataChange?: (labelsData: LabelsData) => void): void {
+  public update(
+    data: IEditorData,
+    onLabelsDataChange?: (labelsData: LabelsData) => void,
+    onHover?: (labelsData: LabelsData) => void,
+  ): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
         case EventType.MOUSE_MOVE:
-          this.mouseMoveHandler(data);
+          this.mouseMoveHandler(data, onHover);
           break;
         case EventType.MOUSE_UP:
           this.mouseUpHandler(data, onLabelsDataChange);
@@ -119,7 +123,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     if (this.isResizeInProgress()) this.endExistingLabelResize(data, onLabelsDataChange);
   }
 
-  public mouseMoveHandler(data: IEditorData): void {
+  public mouseMoveHandler(data: IEditorData, onHover?: (string) => void): void {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.isCreationInProgress()) {
@@ -127,6 +131,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
         if (!!labelPolygon && !this.isResizeInProgress()) {
           if (LabelsSelector.getHighlightedLabelId() !== labelPolygon.id) {
             store.dispatch(updateHighlightedLabelId(labelPolygon.id));
+            onHover(labelPolygon.id);
           }
           const pathOnCanvas: IPoint[] = RenderEngineUtil.transferPolygonFromImageToViewPortContent(
             labelPolygon.vertices,
