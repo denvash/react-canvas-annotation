@@ -19,7 +19,6 @@ import {
 import { AnnotationData } from 'store/labels/types';
 import styled from 'styled-components';
 import { ifProp } from 'styled-tools';
-import 'tailwindcss/dist/base.css';
 import tw from 'twin.macro';
 
 const selector = (state: AppState) => ({

@@ -1,6 +1,6 @@
 import { OptionBox, TypePicker } from 'components';
 import React, { useEffect, useMemo, useReducer, useState } from 'react';
-import { className, LABEL_TYPE } from 'react-canvas-annotation';
+import { className, LABEL_TYPE, ReactCanvasAnnotation } from 'react-canvas-annotation';
 import styled from 'styled-components';
 import 'tailwindcss/dist/base.css';
 import tw from 'twin.macro';
@@ -56,7 +56,7 @@ const App = () => {
         <OptionBox onClick={onControlledExample}>Controlled State Example</OptionBox>
         <OptionBox onClick={onClean}>Clean</OptionBox>
       </TopActions>
-      {/* {imageFile && (
+      {imageFile && (
         <ReactCanvasAnnotation
           zoom={zoom}
           imageFile={imageFile}
@@ -66,7 +66,7 @@ const App = () => {
           isImageDrag={isImageDrag}
           onHover={labels => console.log(`onHover`, labels)}
         />
-      )} */}
+      )}
       <TypePicker onChange={setAnnotationType} />
     </Container>
   );

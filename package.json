@@ -54,7 +54,9 @@
     "prettier": "^2.0.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-scripts": "^3.4.1",
+    "tailwindcss": "^1.4.6",
+    "typescript-plugin-tw-template": "^2.0.1"
   },
   "dependencies": {
     "lodash.filter": "^4.6.0",
@@ -65,14 +67,15 @@
     "redux": "^4.0.5",
     "styled-components": "^5.1.0",
     "styled-tools": "^1.7.1",
-    "twin.macro": "^1.0.0-alpha.10"
+    "twin.macro": "^1.1.0"
   },
   "files": [
     "dist"
   ],
   "babelMacros": {
     "twin": {
-      "styled": "styled-components"
+      "hasSuggestions": true,
+      "preset": "styled-components"
     }
   }
 }

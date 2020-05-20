@@ -17,7 +17,8 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "allowSyntheticDefaultImports": true,
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "plugins": [{ "name": "typescript-plugin-tw-template" }]
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "example"]
