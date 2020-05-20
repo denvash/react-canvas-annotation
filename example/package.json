@@ -8,8 +8,8 @@
     "react-canvas-annotation": "link:..",
     "react-dom": "link:../node_modules/react-dom",
     "react-scripts": "link:../node_modules/react-scripts",
-    "styled-components": "^5.1.0",
-    "twin.macro": "^1.0.0"
+    "twin.macro": "link:../node_modules/twin.macro",
+    "styled-components": "link:../node_modules/styled-components"
   },
   "scripts": {
     "start": "node ../node_modules/react-scripts/bin/react-scripts.js start",
