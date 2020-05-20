@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "7b2a7b5cd0772485b22127c1d0f36472",
+    "revision": "1c4fe8a9d8002418766c7b5e11e41522",
     "url": "/react-canvas-annotation/index.html"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/react-canvas-annotation/static/js/2.703ecb7c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "4d21aff670aa0bd94a96",
-    "url": "/react-canvas-annotation/static/js/main.2a7cb462.chunk.js"
+    "revision": "c2e38e5473ac946cd6f2",
+    "url": "/react-canvas-annotation/static/js/main.f6fcd1f2.chunk.js"
   },
   {
     "revision": "00184e59ec1e364a781c",
