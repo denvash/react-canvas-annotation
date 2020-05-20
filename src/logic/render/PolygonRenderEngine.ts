@@ -1,11 +1,6 @@
 import { RENDER_ENGINE } from 'config';
-import { CursorType } from 'interfaces/enums/CursorType';
-import { EventType } from 'interfaces/enums/EventType';
-import { LabelType } from 'interfaces/enums/LabelType';
-import { IEditorData } from 'interfaces/IEditorData';
-import { ILine } from 'interfaces/ILine';
-import { IPoint } from 'interfaces/IPoint';
-import { IRect } from 'interfaces/IRect';
+import { IEditorData, ILine, IPoint, IRect } from 'interfaces';
+import { CursorType, EventType, LabelType } from 'interfaces/enums';
 import { EditorActions } from 'logic/actions/EditorActions';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';
@@ -15,23 +10,13 @@ import {
   updateImageData,
 } from 'store/labels/actionCreators';
 import { AnnotationData, LabelPolygon, LabelsData } from 'store/labels/types';
-import { GeneralSelector } from 'store/selectors/GeneralSelector';
-import { LabelsSelector } from 'store/selectors/LabelsSelector';
-import { DrawUtil } from 'utils/DrawUtil';
-import { LineUtil } from 'utils/LineUtil';
-import { MouseEventUtil } from 'utils/MouseEventUtil';
-import { RectUtil } from 'utils/RectUtil';
-import { RenderEngineUtil } from 'utils/RenderEngineUtil';
+import { GeneralSelector, LabelsSelector } from 'store/selectors';
+import { DrawUtil, LineUtil, MouseEventUtil, RectUtil, RenderEngineUtil } from 'utils';
 import uuid from 'uuid';
 import { BaseRenderEngine } from './BaseRenderEngine';
 
 export class PolygonRenderEngine extends BaseRenderEngine {
   private config: typeof RENDER_ENGINE = RENDER_ENGINE;
-
-  // =================================================================================================================
-  // STATE
-  // =================================================================================================================
-
   private activePath: IPoint[] = [];
   private resizeAnchorIndex: number = null;
   private suggestedAnchorPositionOnCanvas: IPoint = null;
@@ -41,10 +26,6 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     super(canvas);
     this.labelType = LabelType.POLYGON;
   }
-
-  // =================================================================================================================
-  // EVENT HANDLERS
-  // =================================================================================================================
 
   public update(
     data: IEditorData,
@@ -160,10 +141,6 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     }
   }
 
-  // =================================================================================================================
-  // RENDERING
-  // =================================================================================================================
-
   public render(data: IEditorData): void {
     const imageData: AnnotationData = LabelsSelector.getImageData();
     if (imageData) {
@@ -218,6 +195,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     const standardizedPoints: IPoint[] = this.activePath.map((point: IPoint) =>
       RenderEngineUtil.setPointBetweenPixels(point),
     );
+
     const path = standardizedPoints.concat(data.mousePositionOnViewPortContent);
     const lines: ILine[] = this.mapPointsToLines(path);
 
@@ -226,6 +204,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
       path,
       DrawUtil.hexToRGB(this.config.lineActiveColor, 0.2),
     );
+
     lines.forEach((line: ILine) => {
       DrawUtil.drawLine(
         this.canvas,
@@ -235,6 +214,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
         this.config.lineThickness,
       );
     });
+
     this.mapPointsToAnchors(standardizedPoints).forEach((handleRect: IRect) => {
       DrawUtil.drawRectWithFill(this.canvas, handleRect, this.config.activeAnchorColor);
     });

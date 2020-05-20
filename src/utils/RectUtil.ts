@@ -1,7 +1,7 @@
 import { Direction } from 'interfaces/enums/Direction';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
-import { RectAnchor } from 'interfaces/IRectAnchor';
+import { IRectAnchor } from 'interfaces/IRectAnchor';
 import { ISize } from 'interfaces/ISize';
 import { NumberUtil } from './NumberUtil';
 
@@ -139,7 +139,7 @@ export class RectUtil {
     };
   }
 
-  public static mapRectToAnchors(rect: IRect): RectAnchor[] {
+  public static mapRectToAnchors(rect: IRect): IRectAnchor[] {
     return [
       { type: Direction.TOP_LEFT, position: { x: rect.x, y: rect.y } },
       { type: Direction.TOP, position: { x: rect.x + 0.5 * rect.width, y: rect.y } },

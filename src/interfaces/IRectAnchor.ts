@@ -1,7 +1,7 @@
 import { Direction } from './enums/Direction';
 import { IPoint } from './IPoint';
 
-export interface RectAnchor {
+export interface IRectAnchor {
   type: Direction;
   position: IPoint;
 }

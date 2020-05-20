@@ -1,6 +1,5 @@
-import { EventType } from 'interfaces/enums/EventType';
-import { LabelType } from 'interfaces/enums/LabelType';
-import { IEditorData } from 'interfaces/IEditorData';
+import { IEditorData } from 'interfaces';
+import { EventType, LabelType } from 'interfaces/enums';
 import { LabelsData } from 'store/labels/types';
 import { MouseEventUtil } from 'utils/MouseEventUtil';
 
@@ -40,13 +39,14 @@ export abstract class BaseRenderEngine {
     onClick?: (id: string) => void,
     onLabelsDataChange?: (labelsData: LabelsData) => void,
   ): void;
+
   protected abstract mouseMoveHandler(data: IEditorData, onHover?: (id: string) => void): void;
+
   protected abstract mouseUpHandler(
     data: IEditorData,
     onLabelsDataChange?: (labelsData: LabelsData) => void,
   ): void;
 
   abstract render(data: IEditorData): void;
-
   abstract isInProgress(): boolean;
 }

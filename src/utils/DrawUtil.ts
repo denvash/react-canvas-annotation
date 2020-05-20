@@ -1,5 +1,4 @@
-import { IPoint } from '../interfaces/IPoint';
-import { IRect } from '../interfaces/IRect';
+import { IPoint, IRect } from 'interfaces';
 import { UnitUtil } from './UnitUtil';
 
 export class DrawUtil {
