@@ -1,19 +1,20 @@
 import { VIEW_POINT } from 'config';
+import { IPoint, IRect, ISize } from 'interfaces';
 import { Direction } from 'interfaces/enums/Direction';
-import { IPoint } from 'interfaces/IPoint';
-import { IRect } from 'interfaces/IRect';
-import { ISize } from 'interfaces/ISize';
-import { EditorModel } from 'model/EditorModel';
+import { EditorModel } from 'model';
 import { store } from 'store';
 import { updateZoom } from 'store/general/actionCreators';
-import { GeneralSelector } from 'store/selectors/GeneralSelector';
-import { DirectionUtil } from 'utils/DirectionUtil';
-import { ImageUtil } from 'utils/ImageUtil';
-import { NumberUtil } from 'utils/NumberUtil';
-import { PointUtil } from 'utils/PointUtil';
-import { RectUtil } from 'utils/RectUtil';
-import { SizeUtil } from 'utils/SizeUtil';
-import { EditorActions } from './EditorActions';
+import { GeneralSelector } from 'store/selectors';
+import {
+  CanvasUtil,
+  DirectionUtil,
+  DrawUtil,
+  ImageUtil,
+  NumberUtil,
+  PointUtil,
+  RectUtil,
+  SizeUtil,
+} from 'utils';
 
 export class ViewPortActions {
   public static updateViewPortSize() {
@@ -135,7 +136,24 @@ export class ViewPortActions {
     const currentScrollPosition = ViewPortActions.getAbsoluteScrollPosition();
     const nextScrollPosition = PointUtil.add(currentScrollPosition, translationVector);
     ViewPortActions.setScrollPosition(nextScrollPosition);
-    EditorActions.fullRender();
+
+    // FullRender
+    DrawUtil.clearCanvas(EditorModel.canvas);
+    EditorModel?.primaryRenderingEngine?.render();
+
+    const editorData = {
+      mousePositionOnViewPortContent: EditorModel.mousePositionOnViewPortContent,
+      viewPortContentSize: CanvasUtil.getSize(EditorModel.canvas),
+      event: undefined,
+      zoom: GeneralSelector.getZoom(),
+      viewPortSize: EditorModel.viewPortSize,
+      defaultRenderImageRect: EditorModel.defaultRenderImageRect,
+      viewPortContentImageRect: ViewPortActions.calculateViewPortContentImageRect(),
+      realImageSize: ImageUtil.getSize(EditorModel.image),
+      absoluteViewPortContentScrollPosition: ViewPortActions.getAbsoluteScrollPosition(),
+    };
+
+    EditorModel?.supportRenderingEngine?.render(editorData);
   }
 
   public static setZoom(value: number) {

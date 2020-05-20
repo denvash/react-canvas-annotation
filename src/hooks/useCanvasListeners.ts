@@ -1,7 +1,7 @@
 import { EventType } from 'interfaces/enums/EventType';
 import { LabelType } from 'interfaces/enums/LabelType';
 import { IEditorData } from 'interfaces/IEditorData';
-import { PolygonEngine, RectEngine } from 'logic';
+import { PolygonEngine, PrimaryEngine, RectEngine, ViewPortHelper } from 'logic';
 import { EditorActions } from 'logic/EditorActions';
 import { ViewPortActions } from 'logic/ViewPortActions';
 import { EditorModel } from 'model/EditorModel';
@@ -95,7 +95,8 @@ const useCanvasListeners = ({
   }, [imageData]);
 
   useEffect(() => {
-    EditorActions.mountRenderEnginesAndHelpers();
+    EditorModel.viewPortHelper = new ViewPortHelper();
+    EditorModel.primaryRenderingEngine = new PrimaryEngine(EditorModel.canvas);
     EditorModel.supportRenderingEngine =
       annotationType === LabelType.RECTANGLE
         ? new RectEngine(EditorModel.canvas)

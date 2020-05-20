@@ -3,16 +3,9 @@ import { CursorType } from 'interfaces/enums';
 import { EditorModel } from 'model';
 import { GeneralSelector } from 'store/selectors';
 import { CanvasUtil, DrawUtil, ImageUtil, PointUtil, RectUtil } from 'utils';
-import { PrimaryEngine } from './engines';
 import { ViewPortActions } from './ViewPortActions';
-import { ViewPortHelper } from './ViewPortHelper';
 
 export class EditorActions {
-  public static mountRenderEnginesAndHelpers() {
-    EditorModel.viewPortHelper = new ViewPortHelper();
-    EditorModel.primaryRenderingEngine = new PrimaryEngine(EditorModel.canvas);
-  }
-
   public static fullRender() {
     DrawUtil.clearCanvas(EditorModel.canvas);
     EditorModel?.primaryRenderingEngine?.render();
