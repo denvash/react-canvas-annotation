@@ -1,6 +1,6 @@
 import { CursorType } from 'interfaces/enums/CursorType';
 import { ISize } from 'interfaces/ISize';
-import { Action } from 'store/Actions';
+import { Action } from 'store/actions';
 
 export type GeneralState = {
   windowSize: ISize;

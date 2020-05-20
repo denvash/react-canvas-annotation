@@ -49,7 +49,8 @@ export class PolygonRenderEngine extends BaseRenderEngine {
   public update(
     data: IEditorData,
     onLabelsDataChange?: (labelsData: LabelsData) => void,
-    onHover?: (labelsData: LabelsData) => void,
+    onHover?: (id: string) => void,
+    onClick?: (id: string) => void,
   ): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
@@ -60,7 +61,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
           this.mouseUpHandler(data, onLabelsDataChange);
           break;
         case EventType.MOUSE_DOWN:
-          this.mouseDownHandler(data, onLabelsDataChange);
+          this.mouseDownHandler(data, onClick, onLabelsDataChange);
           break;
         default:
           break;
@@ -68,7 +69,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     }
   }
 
-  public mouseDownHandler(data: IEditorData, onLabelsDataChange): void {
+  public mouseDownHandler(data: IEditorData, onClick, onLabelsDataChange): void {
     const isMouseOverCanvas: boolean = RenderEngineUtil.isMouseOverCanvas(data);
     if (isMouseOverCanvas) {
       if (this.isCreationInProgress()) {
@@ -104,6 +105,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
             this.startExistingLabelResize(polygonUnderMouse.id, anchorIndex);
           } else {
             store.dispatch(updateActiveLabelId(polygonUnderMouse.id));
+            onClick(polygonUnderMouse.id);
             const isMouseOverNewAnchor: boolean = this.isMouseOverAnchor(
               data.mousePositionOnViewPortContent,
               this.suggestedAnchorPositionOnCanvas,
@@ -123,7 +125,7 @@ export class PolygonRenderEngine extends BaseRenderEngine {
     if (this.isResizeInProgress()) this.endExistingLabelResize(data, onLabelsDataChange);
   }
 
-  public mouseMoveHandler(data: IEditorData, onHover?: (string) => void): void {
+  public mouseMoveHandler(data: IEditorData, onHover?: (id: string) => void): void {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.isCreationInProgress()) {

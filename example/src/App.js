@@ -64,7 +64,8 @@ const App = () => {
           onChange={setLabels}
           annotationType={annotationType}
           isImageDrag={isImageDrag}
-          onHover={labels => console.log(`onHover`, labels)}
+          onHover={id => console.log(`onHover`, id)}
+          onClick={id => console.log(`onClick`, id)}
         />
       )}
       <TypePicker onChange={setAnnotationType} />

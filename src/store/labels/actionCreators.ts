@@ -1,5 +1,5 @@
 import { LabelType } from '../../interfaces/enums/LabelType';
-import { Action } from '../Actions';
+import { Action } from '../actions';
 import { AnnotationData, LabelsActionTypes, LabelsData } from './types';
 
 export function updateActiveLabelId(activeLabelId: string): LabelsActionTypes {

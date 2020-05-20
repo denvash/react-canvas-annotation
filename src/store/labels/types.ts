@@ -1,7 +1,7 @@
 import { LabelType } from 'interfaces/enums';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
-import { Action } from 'store/Actions';
+import { Action } from 'store/actions';
 
 export type LabelRect = {
   id: string;

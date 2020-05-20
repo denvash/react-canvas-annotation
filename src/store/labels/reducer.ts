@@ -1,4 +1,4 @@
-import { Action } from '../Actions';
+import { Action } from '../actions';
 import { LabelsActionTypes, LabelsState } from './types';
 
 const initialState: LabelsState = {

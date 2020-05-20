@@ -1,6 +1,6 @@
 import { CursorType } from '../../interfaces/enums/CursorType';
 import { ISize } from '../../interfaces/ISize';
-import { Action } from '../Actions';
+import { Action } from '../actions';
 import { GeneralActionTypes } from './types';
 
 export function updateWindowSize(windowSize: ISize): GeneralActionTypes {

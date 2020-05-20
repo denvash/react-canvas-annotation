@@ -1,6 +1,6 @@
 import { CursorType } from 'interfaces/enums/CursorType';
 import { ViewPointSettings } from 'settings/ViewPointSettings';
-import { Action } from 'store/Actions';
+import { Action } from 'store/actions';
 import { GeneralActionTypes, GeneralState } from './types';
 
 const initialState: GeneralState = {

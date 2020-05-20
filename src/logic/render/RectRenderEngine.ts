@@ -42,7 +42,7 @@ export class RectRenderEngine extends BaseRenderEngine {
   // EVENT HANDLERS
   // =================================================================================================================
 
-  public mouseDownHandler = (data: IEditorData) => {
+  public mouseDownHandler = (data: IEditorData, onClick?: (id: string) => void) => {
     const isMouseOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
     const isMouseOverCanvas: boolean = RenderEngineUtil.isMouseOverCanvas(data);
     if (isMouseOverCanvas) {
@@ -55,6 +55,7 @@ export class RectRenderEngine extends BaseRenderEngine {
           data.viewPortContentImageRect,
         );
         if (!!anchorUnderMouse) {
+          onClick(rectUnderMouse.id);
           store.dispatch(updateActiveLabelId(rectUnderMouse.id));
           this.startRectResize(anchorUnderMouse);
         } else {
@@ -130,7 +131,7 @@ export class RectRenderEngine extends BaseRenderEngine {
     this.endRectTransformation();
   };
 
-  public mouseMoveHandler = (data: IEditorData, onHover?: (string) => void) => {
+  public mouseMoveHandler = (data: IEditorData, onHover?: (id: string) => void) => {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.startResizeRectAnchor) {
