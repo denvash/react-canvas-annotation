@@ -37,7 +37,7 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(labels);
+    console.log(`onChange`, labels);
   }, [labels]);
 
   const onControlledExample = () => setLabels(generateExample());

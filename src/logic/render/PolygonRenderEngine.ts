@@ -1,3 +1,4 @@
+import { RENDER_ENGINE } from 'config';
 import { CursorType } from 'interfaces/enums/CursorType';
 import { EventType } from 'interfaces/enums/EventType';
 import { LabelType } from 'interfaces/enums/LabelType';
@@ -6,7 +7,6 @@ import { ILine } from 'interfaces/ILine';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
 import { EditorActions } from 'logic/actions/EditorActions';
-import { RenderEngineConfig } from 'settings/RenderEngineConfig';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
@@ -26,7 +26,7 @@ import uuid from 'uuid';
 import { BaseRenderEngine } from './BaseRenderEngine';
 
 export class PolygonRenderEngine extends BaseRenderEngine {
-  private config: RenderEngineConfig = new RenderEngineConfig();
+  private config: typeof RENDER_ENGINE = RENDER_ENGINE;
 
   // =================================================================================================================
   // STATE

@@ -1,3 +1,4 @@
+import { RENDER_ENGINE } from 'config';
 import { CursorType } from 'interfaces/enums/CursorType';
 import { LabelType } from 'interfaces/enums/LabelType';
 import { IEditorData } from 'interfaces/IEditorData';
@@ -5,7 +6,6 @@ import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
 import { RectAnchor } from 'interfaces/IRectAnchor';
 import { EditorActions } from 'logic/actions/EditorActions';
-import { RenderEngineConfig } from 'settings/RenderEngineConfig';
 import { store } from 'store';
 import { updateCustomCursorStyle } from 'store/general/actionCreators';
 import {
@@ -24,7 +24,7 @@ import uuid from 'uuid';
 import { BaseRenderEngine } from './BaseRenderEngine';
 
 export class RectRenderEngine extends BaseRenderEngine {
-  private config: RenderEngineConfig = new RenderEngineConfig();
+  private config: typeof RENDER_ENGINE = RENDER_ENGINE;
 
   // =================================================================================================================
   // STATE

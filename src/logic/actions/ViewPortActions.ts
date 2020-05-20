@@ -1,9 +1,9 @@
+import { VIEW_POINT } from 'config';
 import { Direction } from 'interfaces/enums/Direction';
 import { IPoint } from 'interfaces/IPoint';
 import { IRect } from 'interfaces/IRect';
 import { ISize } from 'interfaces/ISize';
 import { EditorModel } from 'model/EditorModel';
-import { ViewPointSettings } from 'settings/ViewPointSettings';
 import { store } from 'store';
 import { updateZoom } from 'store/general/actionCreators';
 import { GeneralSelector } from 'store/selectors/GeneralSelector';
@@ -28,8 +28,8 @@ export class ViewPortActions {
   public static updateDefaultViewPortImageRect() {
     if (!!EditorModel.viewPortSize && !!EditorModel.image) {
       const minMargin: IPoint = {
-        x: ViewPointSettings.CANVAS_MIN_MARGIN_PX,
-        y: ViewPointSettings.CANVAS_MIN_MARGIN_PX,
+        x: VIEW_POINT.CANVAS_MIN_MARGIN_PX,
+        y: VIEW_POINT.CANVAS_MIN_MARGIN_PX,
       };
       const realImageRect: IRect = { x: 0, y: 0, ...ImageUtil.getSize(EditorModel.image) };
       const viewPortWithMarginRect: IRect = { x: 0, y: 0, ...EditorModel.viewPortSize };
@@ -130,7 +130,7 @@ export class ViewPortActions {
     const directionVector: IPoint = DirectionUtil.convertDirectionToVector(direction);
     const translationVector: IPoint = PointUtil.multiply(
       directionVector,
-      ViewPointSettings.TRANSLATION_STEP_PX,
+      VIEW_POINT.TRANSLATION_STEP_PX,
     );
     const currentScrollPosition = ViewPortActions.getAbsoluteScrollPosition();
     const nextScrollPosition = PointUtil.add(currentScrollPosition, translationVector);
@@ -142,8 +142,8 @@ export class ViewPortActions {
     const currentZoom: number = GeneralSelector.getZoom();
     const isNewValueValid: boolean = NumberUtil.isValueInRange(
       value,
-      ViewPointSettings.MIN_ZOOM,
-      ViewPointSettings.MAX_ZOOM,
+      VIEW_POINT.MIN_ZOOM,
+      VIEW_POINT.MAX_ZOOM,
     );
 
     if (isNewValueValid && value !== currentZoom) {

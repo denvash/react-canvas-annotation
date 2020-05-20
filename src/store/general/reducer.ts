@@ -1,5 +1,5 @@
+import { VIEW_POINT } from 'config';
 import { CursorType } from 'interfaces/enums/CursorType';
-import { ViewPointSettings } from 'settings/ViewPointSettings';
 import { Action } from 'store/actions';
 import { GeneralActionTypes, GeneralState } from './types';
 
@@ -8,7 +8,7 @@ const initialState: GeneralState = {
   customCursorStyle: CursorType.DEFAULT,
   preventCustomCursor: false,
   imageDragMode: false,
-  zoom: ViewPointSettings.MIN_ZOOM,
+  zoom: VIEW_POINT.MIN_ZOOM,
 };
 
 export function generalReducer(state = initialState, action: GeneralActionTypes): GeneralState {
