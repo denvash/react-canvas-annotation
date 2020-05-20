@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "474603c372503bc40cba08bb3f552689",
+    "revision": "5a1021dacb573ff606567a4e4c8d71de",
     "url": "/react-canvas-annotation/index.html"
   },
   {
-    "revision": "f3bfa1c619c46717aa6e",
+    "revision": "270bd47f89855b6dde7e",
     "url": "/react-canvas-annotation/static/css/2.13c6718b.chunk.css"
   },
   {
-    "revision": "f3bfa1c619c46717aa6e",
-    "url": "/react-canvas-annotation/static/js/2.d0dcbbfe.chunk.js"
+    "revision": "270bd47f89855b6dde7e",
+    "url": "/react-canvas-annotation/static/js/2.703ecb7c.chunk.js"
   },
   {
     "revision": "c64c486544348f10a6d6c716950bc223",
-    "url": "/react-canvas-annotation/static/js/2.d0dcbbfe.chunk.js.LICENSE.txt"
+    "url": "/react-canvas-annotation/static/js/2.703ecb7c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "9ce6e53c44de8765ef4e",
-    "url": "/react-canvas-annotation/static/js/main.914c111d.chunk.js"
+    "revision": "da823b12ceff2de53525",
+    "url": "/react-canvas-annotation/static/js/main.b6ef9877.chunk.js"
   },
   {
     "revision": "00184e59ec1e364a781c",
