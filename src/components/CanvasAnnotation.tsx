@@ -40,6 +40,7 @@ const CanvasAnnotation: React.FC<ICanvasAnnotation> = ({
   isImageDrag = false,
   onHover,
   onClick,
+  onMouseOut,
 }) => {
   const imageData: AnnotationData = useMemo(
     () => ({
@@ -80,6 +81,7 @@ const CanvasAnnotation: React.FC<ICanvasAnnotation> = ({
     onLabelsDataChange: onChange,
     onHover,
     onClick,
+    onMouseOut,
   });
 
   return (

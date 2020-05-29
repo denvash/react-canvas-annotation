@@ -32,11 +32,12 @@ export class PolygonEngine extends BaseEngine {
     onLabelsDataChange?: (labelsData: LabelsData) => void,
     onHover?: (id: string) => void,
     onClick?: (id: string) => void,
+    onMouseOut?: (id: string) => void,
   ): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
         case EventType.MOUSE_MOVE:
-          this.mouseMoveHandler(data, onHover);
+          this.mouseMoveHandler(data, onHover, onMouseOut);
           break;
         case EventType.MOUSE_UP:
           this.mouseUpHandler(data, onLabelsDataChange);
@@ -106,15 +107,19 @@ export class PolygonEngine extends BaseEngine {
     if (this.isResizeInProgress()) this.endExistingLabelResize(data, onLabelsDataChange);
   }
 
-  public mouseMoveHandler(data: IEditorData, onHover?: (id: string) => void): void {
+  public mouseMoveHandler(
+    data: IEditorData,
+    onHover?: (id: string) => void,
+    onMouseOut?: (id: string) => void,
+  ): void {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.isCreationInProgress()) {
         const labelPolygon: LabelPolygon = this.getPolygonUnderMouse(data);
         if (!!labelPolygon && !this.isResizeInProgress()) {
+          onHover(labelPolygon.id);
           if (LabelsSelector.getHighlightedLabelId() !== labelPolygon.id) {
             store.dispatch(updateHighlightedLabelId(labelPolygon.id));
-            onHover(labelPolygon.id);
           }
           const pathOnCanvas: IPoint[] = RenderEngineUtil.transferPolygonFromImageToViewPortContent(
             labelPolygon.vertices,
@@ -133,6 +138,7 @@ export class PolygonEngine extends BaseEngine {
           }
         } else {
           if (LabelsSelector.getHighlightedLabelId() !== null) {
+            onMouseOut(LabelsSelector.getHighlightedLabelId());
             store.dispatch(updateHighlightedLabelId(null));
             this.discardSuggestedPoint();
           }

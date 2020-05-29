@@ -121,7 +121,11 @@ export class RectEngine extends BaseEngine {
     this.endRectTransformation();
   };
 
-  public mouseMoveHandler = (data: IEditorData, onHover?: (id: string) => void) => {
+  public mouseMoveHandler = (
+    data: IEditorData,
+    onHover?: (id: string) => void,
+    onMouseOut?: (id: string) => void,
+  ) => {
     if (!!data.viewPortContentImageRect && !!data.mousePositionOnViewPortContent) {
       const isOverImage: boolean = RenderEngineUtil.isMouseOverImage(data);
       if (isOverImage && !this.startResizeRectAnchor) {
@@ -133,6 +137,7 @@ export class RectEngine extends BaseEngine {
           }
         } else {
           if (LabelsSelector.getHighlightedLabelId() !== null) {
+            onMouseOut(LabelsSelector.getHighlightedLabelId());
             store.dispatch(updateHighlightedLabelId(null));
           }
         }

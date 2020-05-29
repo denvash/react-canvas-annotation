@@ -11,4 +11,5 @@ export interface ICanvasAnnotation {
   isImageDrag?: boolean;
   onHover?: (id: string) => void;
   onClick?: (id: string) => void;
+  onMouseOut?: (id: string) => void;
 }

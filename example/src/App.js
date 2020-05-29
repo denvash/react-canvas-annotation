@@ -8,6 +8,7 @@ import { generateEmpty, generateExample } from 'utils';
 import image from './img.jpg';
 
 const ZOOM_STEP = 0.1;
+const onConsole = msg => id => console.info(msg, id);
 
 const App = () => {
   const [labels, setLabels] = useState(generateEmpty());
@@ -64,8 +65,9 @@ const App = () => {
           onChange={setLabels}
           annotationType={annotationType}
           isImageDrag={isImageDrag}
-          onHover={id => console.log(`onHover`, id)}
-          onClick={id => console.log(`onClick`, id)}
+          onMouseOut={onConsole(`onMouseOut`)}
+          onHover={onConsole(`onHover`)}
+          onClick={onConsole(`onClick`)}
         />
       )}
       <TypePicker onChange={setAnnotationType} />

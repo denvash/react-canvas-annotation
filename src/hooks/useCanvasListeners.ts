@@ -17,6 +17,7 @@ interface IProps {
   onLabelsDataChange?: (labelsData: LabelsData) => void;
   onHover?: (id: string) => void;
   onClick?: (id: string) => void;
+  onMouseOut?: (id: string) => void;
 }
 
 const NOOP = () => {};
@@ -28,6 +29,7 @@ const useCanvasListeners = ({
   onLabelsDataChange = NOOP,
   onHover,
   onClick,
+  onMouseOut,
 }: IProps) => {
   useEffect(() => {
     const update = (event: MouseEvent) => {
@@ -47,6 +49,7 @@ const useCanvasListeners = ({
           onLabelsDataChange,
           onHover,
           onClick,
+          onMouseOut,
         );
       }
 
@@ -63,7 +66,7 @@ const useCanvasListeners = ({
       window.removeEventListener(EventType.MOUSE_UP, update);
       EditorModel.canvas.removeEventListener(EventType.MOUSE_DOWN, update);
     };
-  }, [imageDragMode, onClick, onHover, onLabelsDataChange]);
+  }, [imageDragMode, onClick, onHover, onLabelsDataChange, onMouseOut]);
 
   useEffect(() => {
     const updateModelAndRender = () => {

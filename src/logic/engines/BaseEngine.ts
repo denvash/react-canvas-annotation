@@ -16,11 +16,12 @@ export abstract class BaseEngine {
     onLabelsDataChange?: (labelsData: LabelsData) => void,
     onHover?: (id: string) => void,
     onClick?: (id: string) => void,
+    onMouseOut?: (id: string) => void,
   ): void {
     if (!!data.event) {
       switch (MouseEventUtil.getEventType(data.event)) {
         case EventType.MOUSE_MOVE:
-          this.mouseMoveHandler(data, onHover);
+          this.mouseMoveHandler(data, onHover, onMouseOut);
           break;
         case EventType.MOUSE_UP:
           this.mouseUpHandler(data, onLabelsDataChange);
@@ -40,7 +41,11 @@ export abstract class BaseEngine {
     onLabelsDataChange?: (labelsData: LabelsData) => void,
   ): void;
 
-  protected abstract mouseMoveHandler(data: IEditorData, onHover?: (id: string) => void): void;
+  protected abstract mouseMoveHandler(
+    data: IEditorData,
+    onHover?: (id: string) => void,
+    onMouseOut?: (id: string) => void,
+  ): void;
 
   protected abstract mouseUpHandler(
     data: IEditorData,
