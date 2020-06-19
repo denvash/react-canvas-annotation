@@ -1,3 +1,5 @@
+> This package is for internal use, it is not officialy stable.
+
 # react-canvas-annotation
 
 > A canvas annotation library for React.
